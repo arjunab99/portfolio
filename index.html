@@ -1,414 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0b0b0c" />
-  <meta name="description" content="Arjun Bhandari — Full Stack Developer in Mumbai. Backend systems, automation, Web3 and DeFi development." />
-  <title>Arjun Bhandari — Full Stack Developer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
-  <style>
-    /* ----- reset & base ----- */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0b0b0c; --bg2: #141416; --bg3: #1e1e22; --white: #f0f0f0;
-      --muted: #8a8a8f; --y: #f5c518; --yd: #b08a10; --r: #e63946; --rd: #a0202a;
-      --br: #2a2a2e; --fd: 'Space Grotesk', sans-serif; --fb: 'Inter', sans-serif;
-      --fm: 'JetBrains Mono', monospace;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--white); font-family: var(--fb);
-      overflow-x: hidden; cursor: default; margin: 0;
-    }
-    body::before {
-      content: ''; position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 9000; opacity: 0.4;
-    }
-    a, button { cursor: default; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="theme-color" content="#0b0b0c"/>
+<meta name="description" content="Arjun Bhandari — Full Stack & Android Developer in Mumbai. Backend, automation, Web3 and mobile development."/>
+<title>Arjun Bhandari — Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0b0b0c;--bg2:#141416;--bg3:#1e1e22;--white:#f0f0f0;
+  --muted:#8a8a8f;--y:#f5c518;--yd:#b08a10;--r:#e63946;--rd:#a0202a;
+  --br:#2a2a2e;
+  --fd:'Space Grotesk',sans-serif;--fb:'Inter',sans-serif;--fm:'JetBrains Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--white);font-family:var(--fb);overflow-x:hidden;cursor:default;overflow-y:hidden}
+body.unlocked{overflow-y:auto}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:9000;opacity:.4}
+a,button{cursor:default}
 
-    /* ----- custom cursor ----- */
-    #cur { position: fixed; width: 8px; height: 8px; background: var(--y); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); mix-blend-mode: difference; transition: width 0.15s, height 0.15s; }
-    #cur-r { position: fixed; width: 32px; height: 32px; border: 1px solid rgba(245,197,24,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width 0.3s, height 0.3s; opacity: 0.7; }
-    .hov #cur { width: 20px; height: 20px; background: var(--r); }
-    .hov #cur-r { width: 48px; height: 48px; border-color: var(--r); }
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;background:var(--y);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .15s,height .15s}
+#cur-r{position:fixed;width:32px;height:32px;border:1px solid rgba(245,197,24,.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .3s,height .3s;opacity:.7}
+.hov #cur{width:20px;height:20px;background:var(--r)}
+.hov #cur-r{width:48px;height:48px;border-color:var(--r)}
 
-    /* ----- splash screen (drag pendant) ----- */
-    #splash {
-      position: fixed; inset: 0; z-index: 10000;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--bg); transition: opacity 0.8s ease, visibility 0.8s ease;
-    }
-    #splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-    .splash-inner {
-      text-align: center; max-width: 600px; width: 90%;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .splash-brand-name {
-      font-family: var(--fd); font-size: clamp(1.8rem, 6vw, 3.2rem); font-weight: 700;
-      letter-spacing: 0.04em; color: var(--white);
-    }
-    .splash-brand-name .dim { color: var(--muted); }
-    .splash-brand-role {
-      display: block; font-family: var(--fm); font-size: clamp(0.7rem, 2vw, 0.9rem);
-      letter-spacing: 0.25em; color: var(--muted); margin-top: 0.2rem;
-    }
-    .blink-cursor { animation: blink 1s step-end infinite; }
-    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+/* SPLASH */
+#splash{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;background:var(--bg);transition:opacity .8s ease,visibility .8s ease}
+#splash.hide{opacity:0;visibility:hidden;pointer-events:none}
+.sp-inner{text-align:center;max-width:560px;width:90%;display:flex;flex-direction:column;align-items:center;gap:0}
+.sp-name{font-family:var(--fd);font-size:clamp(1.8rem,6vw,3.2rem);font-weight:700;letter-spacing:.04em;color:var(--white)}
+.sp-name .dm{color:var(--muted)}
+.sp-role{display:block;font-family:var(--fm);font-size:clamp(.65rem,1.8vw,.85rem);letter-spacing:.25em;color:var(--muted);margin-top:.2rem}
+.blink{animation:blink 1s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.sp-aura{margin:1.8rem 0 1.4rem;width:150px;height:150px;position:relative;border-radius:50%;background:radial-gradient(circle,rgba(245,197,24,.08) 0%,transparent 70%)}
+#auraGl{width:100%;height:100%;display:block;border-radius:50%}
+.sp-rig{display:flex;flex-direction:column;align-items:center;margin-top:.6rem;width:100%;gap:0}
+.pendant{width:76px;height:76px;cursor:grab;touch-action:none;user-select:none}
+.pendant:active{cursor:grabbing}
+.pendant-ring{fill:none;stroke:var(--y);stroke-width:1.5}
+.pendant-trace{fill:none;stroke:var(--muted);stroke-width:1.2}
+.pendant-pad{fill:var(--y)}
+.pendant-mono{font-family:var(--fm);fill:var(--white);font-size:18px;font-weight:600;letter-spacing:.1em}
+.cord-track{width:1px;height:44px;background:var(--br);position:relative;overflow:visible;margin:5px 0 10px}
+.cord-fill{position:absolute;bottom:0;left:0;width:100%;height:0%;background:var(--y);transition:height .05s linear}
+.cord-pulse{position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);width:5px;height:5px;background:var(--y);border-radius:50%;animation:cpulse 1.8s ease-in-out infinite}
+@keyframes cpulse{0%,100%{opacity:.2;transform:translateX(-50%) scale(.8)}50%{opacity:1;transform:translateX(-50%) scale(1.2)}}
+.handle-btn{background:none;border:none;color:var(--muted);font-family:var(--fm);font-size:.65rem;letter-spacing:.15em;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 12px;transition:color .2s;cursor:grab}
+.handle-btn:hover{color:var(--y)}
+.chev-stack{display:flex;flex-direction:column;align-items:center;gap:1px}
+.chev{display:block;width:11px;height:2px;background:currentColor;transform:rotate(45deg)}
+.chev:last-child{transform:rotate(-45deg);margin-top:-3px}
+.sp-copy{margin-top:1rem}
+.sp-inst{font-family:var(--fm);font-size:.65rem;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
+.sp-sub{font-family:var(--fm);font-size:.52rem;letter-spacing:.15em;color:var(--muted);opacity:.55;margin-top:2px}
+.sp-sub kbd{background:var(--bg3);padding:0 5px;border-radius:2px;border:1px solid var(--br);font-family:var(--fm)}
+.sp-readout{font-family:var(--fm);font-size:.62rem;color:var(--y);margin-top:.5rem;letter-spacing:.1em}
 
-    .splash-aura {
-      margin: 2rem 0 1.8rem; width: 160px; height: 160px;
-      position: relative; border-radius: 50%;
-      background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);
-    }
-    #auraGl { width: 100%; height: 100%; display: block; border-radius: 50%; }
+/* PARTICLES */
+#ptc{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.4}
 
-    .splash-rig {
-      display: flex; flex-direction: column; align-items: center;
-      margin-top: 1rem; width: 100%;
-    }
-    .pendant {
-      width: 80px; height: 80px; cursor: grab; touch-action: none;
-      transition: transform 0.1s; user-select: none;
-    }
-    .pendant:active { cursor: grabbing; }
-    .pendant-svg { width: 100%; height: 100%; }
-    .pendant-ring { fill: none; stroke: var(--y); stroke-width: 1.5; }
-    .pendant-trace { fill: none; stroke: var(--muted); stroke-width: 1.2; }
-    .pendant-pad { fill: var(--y); }
-    .pendant-mono { font-family: var(--fm); fill: var(--white); font-size: 18px; font-weight: 600; letter-spacing: 0.1em; }
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;transition:all .4s;background:transparent}
+#nav.sc{background:rgba(11,11,12,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--br)}
+.nav-logo{font-family:var(--fd);font-weight:700;font-size:1rem;letter-spacing:.06em;color:var(--white);text-decoration:none}
+.nav-logo b{color:var(--y)}
+.nav-links{display:flex;gap:1.8rem;flex-wrap:wrap}
+.nb{font-family:var(--fm);font-size:.65rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;background:none;border:none;padding:.3rem 0;position:relative;cursor:default;transition:color .25s}
+.nb::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--y);transition:width .3s}
+.nb:hover,.nb.act{color:var(--y)}
+.nb:hover::after,.nb.act::after{width:100%}
 
-    .cord-track {
-      width: 1px; height: 48px; background: var(--br); position: relative;
-      margin: 6px 0 12px; overflow: visible;
-    }
-    .cord-fill {
-      position: absolute; bottom: 0; left: 0; width: 100%; height: 0%;
-      background: var(--y); transition: height 0.05s linear;
-    }
-    .cord-pulse {
-      position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
-      width: 6px; height: 6px; background: var(--y); border-radius: 50%;
-      animation: pulse 1.8s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%, 100% { opacity: 0.2; transform: translateX(-50%) scale(0.8); } 50% { opacity: 1; transform: translateX(-50%) scale(1.2); } }
+/* HERO */
+#hero{position:relative;height:100vh;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+#hvid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.88;z-index:0}
+.hov-lay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,11,12,.1) 0%,rgba(11,11,12,.3) 50%,rgba(11,11,12,.92) 100%);z-index:1}
+.hero-copy{position:absolute;bottom:12%;left:6%;z-index:2;max-width:700px}
+.hero-eyebrow{font-family:var(--fm);font-size:.65rem;letter-spacing:.2em;color:var(--y);text-transform:uppercase;display:block;margin-bottom:.6rem}
+.hero-title{font-family:var(--fd);font-size:clamp(2.6rem,8vw,5.2rem);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.hero-title em{color:var(--y);font-style:normal}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:2;text-align:center;animation:fup .8s 1.2s both;display:flex;flex-direction:column;align-items:center}
+.scroll-hint p{font-family:var(--fm);font-size:.6rem;letter-spacing:.22em;color:rgba(255,255,255,.55);text-transform:uppercase;margin-bottom:.6rem}
+.scline{width:1px;height:48px;background:linear-gradient(to bottom,var(--y),transparent);animation:spulse 2s ease-in-out infinite}
+@keyframes fup{from{opacity:0;transform:translateX(-50%) translateY(24px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+@keyframes spulse{0%,100%{opacity:.3}50%{opacity:1}}
 
-    .handle {
-      background: none; border: none; color: var(--muted);
-      font-family: var(--fm); font-size: 0.7rem; letter-spacing: 0.15em;
-      display: flex; flex-direction: column; align-items: center; gap: 2px;
-      cursor: grab; padding: 4px 12px; transition: color 0.2s;
-    }
-    .handle:hover { color: var(--y); }
-    .chev-stack { display: flex; flex-direction: column; align-items: center; gap: 1px; }
-    .chev { display: block; width: 12px; height: 2px; background: currentColor; transform: rotate(45deg); }
-    .chev:last-child { transform: rotate(-45deg); margin-top: -3px; }
+/* STATS */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--br);border-bottom:1px solid var(--br)}
+.si{padding:2.2rem 1rem;text-align:center;border-right:1px solid var(--br);position:relative;overflow:hidden;cursor:default}
+.si:last-child{border-right:none}
+.si-fill{position:absolute;inset:0;background:var(--y);transform:scaleY(0);transform-origin:bottom;transition:transform .45s cubic-bezier(.77,0,.18,1);z-index:0}
+.si:hover .si-fill{transform:scaleY(1)}
+.si-num{font-family:var(--fd);font-size:2.6rem;font-weight:700;color:var(--y);line-height:1;position:relative;z-index:1;transition:color .45s}
+.si-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-top:.4rem;position:relative;z-index:1;transition:color .45s}
+.si:hover .si-num,.si:hover .si-lbl{color:var(--bg)}
 
-    .splash-copy { margin-top: 1.2rem; }
-    .splash-instruction {
-      font-family: var(--fm); font-size: 0.7rem; letter-spacing: 0.2em;
-      color: var(--muted); text-transform: uppercase;
-    }
-    .splash-sub {
-      font-family: var(--fm); font-size: 0.55rem; letter-spacing: 0.15em;
-      color: var(--muted); opacity: 0.6; margin-top: 2px;
-    }
-    .splash-sub kbd {
-      background: var(--bg3); padding: 0 6px; border-radius: 2px;
-      border: 1px solid var(--br); font-family: var(--fm);
-    }
-    .splash-readout {
-      font-family: var(--fm); font-size: 0.65rem; color: var(--y);
-      margin-top: 0.6rem; letter-spacing: 0.1em;
-    }
+/* SECTION LABELS */
+.slbl{font-family:var(--fm);font-size:.6rem;letter-spacing:.28em;color:var(--y);text-transform:uppercase;display:block;margin-bottom:.8rem}
+.stitle{font-family:var(--fd);font-size:clamp(2.2rem,5vw,4rem);font-weight:700;line-height:1.05;letter-spacing:-.02em}
+.ay{color:var(--y)}.ar{color:var(--r)}
 
-    /* ----- particles canvas ----- */
-    #ptc { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.4; }
+/* H-SCROLL */
+.hso{width:100%;overflow:hidden;position:relative;padding:2rem 0}
+.hso::before,.hso::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.hso::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.hso::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.hst{display:flex;gap:1.8rem;width:max-content;padding:0 4rem}
+.fe-anim{animation:sL 50s linear infinite}
+.be-anim{animation:sR 50s linear infinite}
+.hso:hover .fe-anim,.hso:hover .be-anim{animation-play-state:paused}
+@keyframes sL{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes sR{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
 
-    /* ----- navigation ----- */
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 3rem; transition: all 0.4s; background: transparent;
-    }
-    #nav.sc { background: rgba(11,11,12,0.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--br); }
-    .nav-logo { font-family: var(--fd); font-weight: 700; font-size: 1rem; letter-spacing: 0.06em; color: var(--white); text-decoration: none; }
-    .nav-logo b { color: var(--y); }
-    .nav-links { display: flex; gap: 1.8rem; flex-wrap: wrap; }
-    .nb {
-      font-family: var(--fm); font-size: 0.65rem; letter-spacing: 0.14em;
-      color: var(--muted); text-transform: uppercase; background: none;
-      border: none; padding: 0.3rem 0; position: relative; cursor: default;
-      transition: color 0.25s;
-    }
-    .nb::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--y); transition: width 0.3s; }
-    .nb:hover, .nb.act { color: var(--y); }
-    .nb:hover::after, .nb.act::after { width: 100%; }
+/* FRONTEND SECTION */
+#frontend{padding:6rem 0 2rem}
+.fe-hdr{padding:0 4rem 2.5rem;display:flex;justify-content:space-between;align-items:flex-end}
+.be-hdr{padding:0 4rem 2.5rem;display:flex;justify-content:space-between;align-items:flex-end}
+.dir{font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;color:var(--muted);display:flex;align-items:center;gap:.5rem}
+.darr{color:var(--y);font-size:1rem;animation:ab 1.4s ease-in-out infinite}
+@keyframes ab{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
 
-    /* ----- hero ----- */
-    #hero {
-      position: relative; height: 100vh; overflow: hidden;
-      display: flex; align-items: flex-end; justify-content: center;
-    }
-    #hvid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.88; z-index: 0; }
-    .hov-lay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(11,11,12,0.1) 0%, rgba(11,11,12,0.3) 50%, rgba(11,11,12,0.92) 100%); z-index: 1; }
-    .hero-copy {
-      position: absolute; bottom: 12%; left: 6%; z-index: 2; max-width: 700px;
-      text-align: left;
-    }
-    .hero-eyebrow {
-      font-family: var(--fm); font-size: 0.65rem; letter-spacing: 0.2em;
-      color: var(--y); text-transform: uppercase; display: block; margin-bottom: 0.6rem;
-    }
-    .hero-title {
-      font-family: var(--fd); font-size: clamp(2.6rem, 8vw, 5.2rem);
-      font-weight: 700; line-height: 1.05; letter-spacing: -0.02em;
-    }
-    .hero-title em { color: var(--y); font-style: normal; }
-    .scroll-hint {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      z-index: 2; text-align: center; animation: fup 0.8s 1.2s both;
-      display: flex; flex-direction: column; align-items: center;
-    }
-    .scroll-hint p { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.22em; color: rgba(255,255,255,0.55); text-transform: uppercase; margin-bottom: 0.6rem; }
-    .scline { width: 1px; height: 48px; background: linear-gradient(to bottom, var(--y), transparent); animation: pulse 2s ease-in-out infinite; }
-    @keyframes fup { from { opacity: 0; transform: translateX(-50%) translateY(24px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+/* CARDS */
+.fc,.bc{min-width:290px;max-width:290px;background:var(--bg2);border:1px solid var(--br);padding:1.75rem;position:relative;overflow:hidden;transition:border-color .3s,transform .35s;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%)}
+.fc::before,.bc::before{content:'';position:absolute;left:0;top:0;width:3px;height:0;background:var(--y);transition:height .4s cubic-bezier(.77,0,.18,1)}
+.fc:hover,.bc:hover{border-color:var(--yd);transform:translateY(-6px)}
+.fc:hover::before,.bc:hover::before{height:100%}
+.bc{clip-path:polygon(14px 0,100% 0,100% 100%,0 100%,0 14px)}
+.bc::before{left:auto;right:0;background:var(--r)}
+.bc:hover{border-color:var(--rd)}
+.fnum{position:absolute;top:1.2rem;right:1.4rem;font-family:var(--fm);font-size:.6rem;color:var(--br)}
+.ftag{font-family:var(--fm);font-size:.58rem;letter-spacing:.14em;color:var(--y);text-transform:uppercase;margin-bottom:.6rem}
+.btag{font-family:var(--fm);font-size:.58rem;letter-spacing:.14em;color:var(--r);text-transform:uppercase;margin-bottom:.6rem}
+.ftitle{font-family:var(--fd);font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:.5rem;line-height:1.25}
+.fdesc{font-size:.78rem;color:var(--muted);line-height:1.65;margin-bottom:.8rem}
+.pills{display:flex;flex-wrap:wrap;gap:.4rem}
+.pl{font-family:var(--fm);font-size:.52rem;letter-spacing:.08em;padding:.2rem .5rem;border:1px solid var(--br);color:var(--muted);text-transform:uppercase}
+.pl.y{border-color:var(--yd);color:var(--y)}
+.pl.r{border-color:var(--rd);color:var(--r)}
 
-    /* ----- section labels ----- */
-    .slbl { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.28em; color: var(--y); text-transform: uppercase; display: block; margin-bottom: 0.8rem; }
-    .stitle { font-family: var(--fd); font-size: clamp(2.2rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; }
-    .ay { color: var(--y); } .ar { color: var(--r); }
+/* MARQUEE */
+.mq{padding:1.2rem 0;border-top:1px solid var(--br);border-bottom:1px solid var(--br);overflow:hidden}
+.mq.dk{background:var(--bg2)}
+.mqt{display:flex;gap:3rem;width:max-content;animation:mq 22s linear infinite}
+.mqt.rev{animation-direction:reverse}
+.mqi{font-family:var(--fd);font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:3rem}
+.mqd{width:4px;height:4px;border-radius:50%;background:var(--y);flex-shrink:0}
+.mqd.r{background:var(--r)}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-    /* ----- horizontal scroll (frontend / backend) ----- */
-    .hso { width: 100%; overflow: hidden; position: relative; padding: 2rem 0; }
-    .hso::before, .hso::after { content: ''; position: absolute; top: 0; bottom: 0; width: 120px; z-index: 2; pointer-events: none; }
-    .hso::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
-    .hso::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
-    .hst { display: flex; gap: 1.8rem; width: max-content; padding: 0 4rem; }
-    .fe-anim { animation: sL 48s linear infinite; }
-    .be-anim { animation: sR 48s linear infinite; }
-    .hso:hover .fe-anim, .hso:hover .be-anim { animation-play-state: paused; }
-    @keyframes sL { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-    @keyframes sR { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
+.dv{height:1px;background:var(--br);position:relative}
+.dv::before{content:'';position:absolute;left:4rem;top:-2px;width:48px;height:4px;background:var(--y)}
+.dv.r::before{background:var(--r)}
 
-    #frontend { padding: 6rem 0 2rem; }
-    .fe-hdr { padding: 0 4rem 2.5rem; display: flex; justify-content: space-between; align-items: flex-end; }
-    .dir { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.15em; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
-    .darr { color: var(--y); font-size: 1rem; animation: ab 1.4s ease-in-out infinite; }
-    @keyframes ab { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
+/* MISC */
+#misc{padding:6rem 4rem}
+.mg{display:grid;grid-template-columns:repeat(12,1fr);gap:1.4rem;margin-top:3rem}
+.mc{background:var(--bg2);border:1px solid var(--br);padding:1.75rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.mc::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 60%,rgba(245,197,24,.04));pointer-events:none}
+.mc:hover{border-color:var(--yd);transform:translateY(-3px)}
+.mc.s7{grid-column:span 7}.mc.s5{grid-column:span 5}
+.mc.s4{grid-column:span 4}.mc.s6{grid-column:span 6}.mc.s8{grid-column:span 8}
+.mc.s12{grid-column:span 12}
+.mbadge{display:inline-block;font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;padding:.2rem .6rem;background:rgba(245,197,24,.08);border:1px solid var(--yd);color:var(--y);text-transform:uppercase;margin-bottom:.8rem}
+.mbadge.r{background:rgba(230,57,70,.08);border-color:var(--rd);color:var(--r)}
+.mico{font-size:1.8rem;margin-bottom:.6rem;line-height:1}
+.mtitle{font-family:var(--fd);font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.4rem}
+.mdesc{font-size:.78rem;color:var(--muted);line-height:1.65}
 
-    .fc, .bc {
-      min-width: 290px; max-width: 290px; background: var(--bg2);
-      border: 1px solid var(--br); padding: 1.75rem; position: relative;
-      overflow: hidden; transition: border-color 0.3s, transform 0.35s;
-      clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
-    }
-    .fc::before, .bc::before {
-      content: ''; position: absolute; left: 0; top: 0; width: 3px; height: 0;
-      background: var(--y); transition: height 0.4s cubic-bezier(0.77,0,0.18,1);
-    }
-    .fc:hover, .bc:hover { border-color: var(--yd); transform: translateY(-6px); }
-    .fc:hover::before, .bc:hover::before { height: 100%; }
-    .bc { clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px); }
-    .bc::before { left: auto; right: 0; background: var(--r); }
-    .bc:hover { border-color: var(--rd); }
-    .bc:hover::before { height: 100%; }
+/* EXPERIENCE */
+#experience{padding:6rem 4rem;background:var(--bg2)}
+.eg{margin-top:3rem}
+.ei{display:grid;grid-template-columns:180px 1fr;gap:3rem;padding:2.2rem 0;border-bottom:1px solid var(--br);position:relative}
+.ei:first-child{border-top:1px solid var(--br)}
+.ei::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--y);transition:width .65s ease}
+.ei.vis::after{width:100%}
+.edate{font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;color:var(--y);text-transform:uppercase;margin-bottom:.2rem}
+.eloc{font-family:var(--fm);font-size:.55rem;color:var(--muted)}
+.eco{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--white);margin-bottom:.1rem}
+.erole{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;color:var(--r);text-transform:uppercase;margin-bottom:.8rem;line-height:1.4}
+.epts{list-style:none;display:flex;flex-direction:column;gap:.4rem}
+.epts li{font-size:.78rem;color:var(--muted);line-height:1.6;padding-left:1rem;position:relative}
+.epts li::before{content:'—';position:absolute;left:0;color:var(--y)}
 
-    .fnum { position: absolute; top: 1.2rem; right: 1.4rem; font-family: var(--fm); font-size: 0.6rem; color: var(--br); }
-    .ftag { font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.14em; color: var(--y); text-transform: uppercase; margin-bottom: 0.6rem; }
-    .btag { font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.14em; color: var(--r); text-transform: uppercase; margin-bottom: 0.6rem; }
-    .ftitle { font-family: var(--fd); font-size: 1.1rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; line-height: 1.25; }
-    .fdesc { font-size: 0.78rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.8rem; }
-    .pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-    .pl { font-family: var(--fm); font-size: 0.52rem; letter-spacing: 0.08em; padding: 0.2rem 0.5rem; border: 1px solid var(--br); color: var(--muted); text-transform: uppercase; }
-    .pl.y { border-color: var(--yd); color: var(--y); }
-    .pl.r { border-color: var(--rd); color: var(--r); }
+/* ABOUT */
+#about{padding:6rem 4rem;position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;top:-80px;right:-150px;width:450px;height:450px;background:radial-gradient(circle,rgba(245,197,24,.04),transparent 70%);pointer-events:none}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:4rem;margin-top:3rem}
+.aintro{font-family:var(--fd);font-size:clamp(1rem,1.8vw,1.2rem);line-height:1.6;color:var(--white);margin-bottom:1.5rem}
+.aintro b{color:var(--y)}
+.abody{font-size:.82rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
+.elbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.24em;color:var(--y);text-transform:uppercase;margin:1.8rem 0 1rem}
+.erow{padding:.8rem 0;border-bottom:1px solid var(--br);display:flex;justify-content:space-between;align-items:flex-start}
+.erow:first-of-type{border-top:1px solid var(--br)}
+.eschool{font-family:var(--fd);font-size:.85rem;font-weight:600;color:var(--white)}
+.edeg{font-size:.72rem;color:var(--muted);margin-top:.1rem}
+.emeta{text-align:right;font-family:var(--fm);font-size:.6rem;color:var(--muted)}
+.eyr{color:var(--y)}
+.sklbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.24em;color:var(--y);text-transform:uppercase;margin-bottom:1.2rem}
+.skc{display:flex;flex-wrap:wrap;gap:.5rem}
+.sk{font-family:var(--fm);font-size:.6rem;letter-spacing:.06em;padding:.35rem .7rem;border:1px solid var(--br);color:var(--muted);text-transform:uppercase;transition:all .28s;position:relative;overflow:hidden;cursor:default}
+.sk::before{content:'';position:absolute;inset:0;background:var(--y);transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.77,0,.18,1)}
+.sk:hover::before{transform:scaleX(1)}
+.sk:hover{color:var(--bg);border-color:var(--y)}
+.sk span{position:relative;z-index:1}
+.sk.r::before{background:var(--r)}
+.sk.r:hover{color:var(--white);border-color:var(--r)}
 
-    /* ----- marquee ----- */
-    .mq { padding: 1.2rem 0; border-top: 1px solid var(--br); border-bottom: 1px solid var(--br); overflow: hidden; }
-    .mq.dk { background: var(--bg2); }
-    .mqt { display: flex; gap: 3rem; width: max-content; animation: mq 22s linear infinite; }
-    .mqt.rev { animation-direction: reverse; }
-    .mqi { font-family: var(--fd); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; display: flex; align-items: center; gap: 3rem; }
-    .mqd { width: 4px; height: 4px; border-radius: 50%; background: var(--y); flex-shrink: 0; }
-    .mqd.r { background: var(--r); }
-    @keyframes mq { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+/* CONTACT */
+#contact{padding:6rem 4rem;text-align:center;position:relative;overflow:hidden}
+#contact::before{content:'';position:absolute;bottom:-150px;left:50%;transform:translateX(-50%);width:700px;height:350px;background:radial-gradient(circle,rgba(230,57,70,.06),transparent 70%);pointer-events:none}
+.cttitle{font-family:var(--fd);font-size:clamp(2.6rem,8vw,5.5rem);font-weight:700;line-height:.95;letter-spacing:-.03em;margin-bottom:1.5rem}
+.cts{color:transparent;-webkit-text-stroke:1px var(--white)}
+.ctsy{color:transparent;-webkit-text-stroke:1px var(--y)}
+.ctsub{font-size:.85rem;color:var(--muted);max-width:480px;margin:0 auto 1.8rem;line-height:1.7}
+.email-show{font-family:var(--fm);font-size:.95rem;letter-spacing:.06em;margin-bottom:2rem;display:flex;align-items:center;justify-content:center;gap:.7rem;flex-wrap:wrap}
+.email-show a{color:var(--y);text-decoration:none;border-bottom:1px solid var(--yd);padding-bottom:2px;transition:all .2s}
+.email-show a:hover{color:var(--white);border-color:var(--white)}
+.ctact{display:flex;gap:3rem;justify-content:center;align-items:flex-start;flex-wrap:wrap;margin-bottom:3rem}
+.ctbw{display:flex;flex-direction:column;align-items:center;gap:.7rem}
+.ctbtn{font-family:var(--fd);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--white);text-decoration:none;padding:.7rem 1.8rem;border:1px solid var(--br);position:relative;overflow:hidden;display:inline-block;transition:border-color .3s}
+.ctbtn::before{content:'';position:absolute;inset:0;background:var(--y);transform:translateY(105%);transition:transform .32s cubic-bezier(.77,0,.18,1)}
+.ctbtn:hover::before{transform:translateY(0)}
+.ctbtn:hover{color:var(--bg);border-color:var(--y)}
+.ctbtn span{position:relative;z-index:1}
+.ctbtn.rb::before{background:var(--r)}
+.ctbtn.rb:hover{color:var(--white);border-color:var(--r)}
+.qrbox{background:var(--white);padding:8px;display:inline-block}
+.qrcap{font-family:var(--fm);font-size:.5rem;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:.4rem}
+.ftbar{padding-top:2rem;border-top:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fttxt{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.fttxt b{color:var(--y)}
 
-    .dv { height: 1px; background: var(--br); position: relative; }
-    .dv::before { content: ''; position: absolute; left: 4rem; top: -2px; width: 48px; height: 4px; background: var(--y); }
-    .dv.r::before { background: var(--r); }
+/* REVEAL */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.6,.3,1),transform .7s cubic-bezier(.2,.6,.3,1)}
+.rv.vis{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
 
-    /* ----- misc ----- */
-    #misc { padding: 6rem 4rem; }
-    .mg { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.4rem; margin-top: 3rem; }
-    .mc {
-      background: var(--bg2); border: 1px solid var(--br); padding: 1.75rem;
-      position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
-    }
-    .mc::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 60%, rgba(245,197,24,0.04)); pointer-events: none; }
-    .mc:hover { border-color: var(--yd); transform: translateY(-3px); }
-    .mc.s7 { grid-column: span 7; } .mc.s5 { grid-column: span 5; }
-    .mc.s4 { grid-column: span 4; } .mc.s6 { grid-column: span 6; }
-    .mbadge {
-      display: inline-block; font-family: var(--fm); font-size: 0.52rem; letter-spacing: 0.1em;
-      padding: 0.2rem 0.6rem; background: rgba(245,197,24,0.08); border: 1px solid var(--yd);
-      color: var(--y); text-transform: uppercase; margin-bottom: 0.8rem;
-    }
-    .mbadge.r { background: rgba(230,57,70,0.08); border-color: var(--rd); color: var(--r); }
-    .mico { font-size: 1.8rem; margin-bottom: 0.6rem; line-height: 1; }
-    .mtitle { font-family: var(--fd); font-size: 1rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
-    .mdesc { font-size: 0.78rem; color: var(--muted); line-height: 1.65; }
-
-    /* ----- experience ----- */
-    #experience { padding: 6rem 4rem; background: var(--bg2); }
-    .eg { margin-top: 3rem; }
-    .ei {
-      display: grid; grid-template-columns: 180px 1fr; gap: 3rem;
-      padding: 2.2rem 0; border-bottom: 1px solid var(--br); position: relative;
-    }
-    .ei:first-child { border-top: 1px solid var(--br); }
-    .ei::after {
-      content: ''; position: absolute; bottom: 0; left: 0; width: 0;
-      height: 1px; background: var(--y); transition: width 0.65s ease;
-    }
-    .ei.vis::after { width: 100%; }
-    .edate { font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--y); text-transform: uppercase; margin-bottom: 0.2rem; }
-    .eloc { font-family: var(--fm); font-size: 0.55rem; color: var(--muted); }
-    .eco { font-family: var(--fd); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.1rem; }
-    .erole { font-family: var(--fm); font-size: 0.65rem; letter-spacing: 0.12em; color: var(--r); text-transform: uppercase; margin-bottom: 0.8rem; }
-    .epts { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
-    .epts li { font-size: 0.78rem; color: var(--muted); line-height: 1.6; padding-left: 1rem; position: relative; }
-    .epts li::before { content: '—'; position: absolute; left: 0; color: var(--y); }
-
-    /* ----- about ----- */
-    #about { padding: 6rem 4rem; position: relative; overflow: hidden; }
-    .ag { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; }
-    .aintro { font-family: var(--fd); font-size: clamp(1rem, 1.8vw, 1.2rem); line-height: 1.6; color: var(--white); margin-bottom: 1.5rem; }
-    .aintro b { color: var(--y); }
-    .abody { font-size: 0.82rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.2rem; }
-    .elbl { font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.24em; color: var(--y); text-transform: uppercase; margin: 1.8rem 0 1rem; }
-    .erow { padding: 0.8rem 0; border-bottom: 1px solid var(--br); display: flex; justify-content: space-between; align-items: flex-start; }
-    .erow:first-of-type { border-top: 1px solid var(--br); }
-    .eschool { font-family: var(--fd); font-size: 0.85rem; font-weight: 600; color: var(--white); }
-    .edeg { font-size: 0.72rem; color: var(--muted); margin-top: 0.1rem; }
-    .emeta { text-align: right; font-family: var(--fm); font-size: 0.6rem; color: var(--muted); }
-    .eyr { color: var(--y); }
-    .sklbl { font-family: var(--fm); font-size: 0.58rem; letter-spacing: 0.24em; color: var(--y); text-transform: uppercase; margin-bottom: 1.2rem; }
-    .skc { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .sk {
-      font-family: var(--fm); font-size: 0.6rem; letter-spacing: 0.06em;
-      padding: 0.35rem 0.7rem; border: 1px solid var(--br); color: var(--muted);
-      text-transform: uppercase; transition: all 0.28s; position: relative; overflow: hidden;
-    }
-    .sk::before { content: ''; position: absolute; inset: 0; background: var(--y); transform: scaleX(0); transform-origin: left; transition: transform 0.25s cubic-bezier(0.77,0,0.18,1); }
-    .sk:hover::before { transform: scaleX(1); }
-    .sk:hover { color: var(--bg); border-color: var(--y); }
-    .sk span { position: relative; z-index: 1; }
-    .sk.r::before { background: var(--r); }
-    .sk.r:hover { color: var(--white); border-color: var(--r); }
-
-    /* ----- contact ----- */
-    #contact { padding: 6rem 4rem; text-align: center; position: relative; overflow: hidden; }
-    .cttitle { font-family: var(--fd); font-size: clamp(2.6rem, 8vw, 5.5rem); font-weight: 700; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 1.5rem; }
-    .cts { color: transparent; -webkit-text-stroke: 1px var(--white); }
-    .ctsy { color: transparent; -webkit-text-stroke: 1px var(--y); }
-    .ctsub { font-size: 0.85rem; color: var(--muted); max-width: 480px; margin: 0 auto 1.8rem; line-height: 1.7; }
-    .email-show { font-family: var(--fm); font-size: 0.95rem; letter-spacing: 0.06em; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; gap: 0.7rem; flex-wrap: wrap; }
-    .email-show a { color: var(--y); text-decoration: none; border-bottom: 1px solid var(--yd); padding-bottom: 2px; transition: all 0.2s; }
-    .email-show a:hover { color: var(--white); border-color: var(--white); }
-    .ctact { display: flex; gap: 3rem; justify-content: center; align-items: flex-start; flex-wrap: wrap; margin-bottom: 3rem; }
-    .ctbw { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
-    .ctbtn {
-      font-family: var(--fd); font-size: 0.8rem; font-weight: 600; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--white); text-decoration: none;
-      padding: 0.7rem 1.8rem; border: 1px solid var(--br); position: relative;
-      overflow: hidden; display: inline-block; transition: border-color 0.3s;
-    }
-    .ctbtn::before { content: ''; position: absolute; inset: 0; background: var(--y); transform: translateY(105%); transition: transform 0.32s cubic-bezier(0.77,0,0.18,1); }
-    .ctbtn:hover::before { transform: translateY(0); }
-    .ctbtn:hover { color: var(--bg); border-color: var(--y); }
-    .ctbtn span { position: relative; z-index: 1; }
-    .ctbtn.rb::before { background: var(--r); }
-    .ctbtn.rb:hover { color: var(--white); border-color: var(--r); }
-    .qrbox { background: var(--white); padding: 8px; display: inline-block; }
-    .qrcap { font-family: var(--fm); font-size: 0.5rem; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-top: 0.4rem; }
-    .ftbar { padding-top: 2rem; border-top: 1px solid var(--br); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .fttxt { font-family: var(--fm); font-size: 0.55rem; letter-spacing: 0.1em; color: var(--muted); text-transform: uppercase; }
-    .fttxt b { color: var(--y); }
-
-    /* reveal */
-    .rv { opacity: 1; transform: translateY(0); transition: opacity 0.7s cubic-bezier(0.2,0.6,0.3,1), transform 0.7s cubic-bezier(0.2,0.6,0.3,1); }
-    .rv.vis { opacity: 1; transform: none; }
-    .rv.d1 { transition-delay: 0.1s; } .rv.d2 { transition-delay: 0.2s; } .rv.d3 { transition-delay: 0.3s; } .rv.d4 { transition-delay: 0.4s; }
-
-    /* responsive */
-    @media (max-width: 900px) {
-      #nav { padding: 1rem 1.5rem; }
-      .nav-links { gap: 1rem; }
-      .fe-hdr, .be-hdr { padding: 0 1.5rem 1.8rem; flex-direction: column; align-items: flex-start; gap: 0.4rem; }
-      #misc, #experience, #about, #contact { padding: 4rem 1.5rem; }
-      .mg { grid-template-columns: 1fr; }
-      .mc.s7, .mc.s5, .mc.s4, .mc.s6 { grid-column: span 1; }
-      .ag { grid-template-columns: 1fr; gap: 2.5rem; }
-      .ei { grid-template-columns: 1fr; gap: 0.8rem; }
-      .hero-copy { bottom: 15%; left: 5%; }
-    }
-    @media (max-width: 600px) {
-      .nav-links { display: none; }
-      .splash-brand-name { font-size: 1.8rem; }
-      .pendant { width: 64px; height: 64px; }
-      .ctact { flex-direction: column; align-items: center; }
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:900px){
+  #nav{padding:1rem 1.5rem}
+  .nav-links{gap:1rem}
+  .fe-hdr,.be-hdr{padding:0 1.5rem 1.8rem;flex-direction:column;align-items:flex-start;gap:.4rem}
+  #misc,#experience,#about,#contact{padding:4rem 1.5rem}
+  .mg{grid-template-columns:1fr}
+  .mc.s7,.mc.s5,.mc.s4,.mc.s6,.mc.s8,.mc.s12{grid-column:span 1}
+  .ag{grid-template-columns:1fr;gap:2.5rem}
+  .ei{grid-template-columns:1fr;gap:.8rem}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .nav-links{display:none}
+  .sp-name{font-size:1.8rem}
+  .pendant{width:60px;height:60px}
+  .ctact{flex-direction:column;align-items:center}
+  .ftbar{flex-direction:column;text-align:center}
+}
+</style>
 </head>
 <body>
 
-<!-- ===== SPLASH SCREEN ===== -->
+<!-- SPLASH -->
 <div id="splash" role="dialog" aria-label="Site entrance">
-  <div class="splash-inner">
-    <div class="splash-brand">
-      <span class="splash-brand-name">ARJUN<span class="dim">.</span>BHANDARI</span>
-      <span class="splash-brand-role">Full Stack Developer<span class="blink-cursor">_</span></span>
+  <div class="sp-inner">
+    <div>
+      <div class="sp-name">ARJUN<span class="dm">.</span>BHANDARI</div>
+      <span class="sp-role">Full Stack &amp; Android Developer<span class="blink">_</span></span>
     </div>
-    <div class="splash-aura" aria-hidden="true"><canvas id="auraGl"></canvas></div>
-    <div class="splash-rig">
+    <div class="sp-aura" aria-hidden="true"><canvas id="auraGl"></canvas></div>
+    <div class="sp-rig">
       <div class="pendant" id="pendant" aria-hidden="true">
-        <svg class="pendant-svg" viewBox="0 0 120 120">
-          <defs><linearGradient id="pendantGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232323"/><stop offset="1" stop-color="#121212"/></linearGradient></defs>
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="pg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#232323"/><stop offset="1" stop-color="#121212"/></linearGradient></defs>
           <circle cx="60" cy="60" r="57" class="pendant-ring"/>
-          <path class="pendant-trace" d="M16 60 H32 L38 52 H54 M66 52 H82 L88 60 H104 M16 60 V70 M104 60 V70"/>
+          <path class="pendant-trace" d="M16 60H32L38 52H54M66 52H82L88 60H104M16 60V70M104 60V70"/>
           <circle cx="38" cy="52" r="2.2" class="pendant-pad"/>
           <circle cx="82" cy="52" r="2.2" class="pendant-pad"/>
           <text x="60" y="70" text-anchor="middle" class="pendant-mono">AB</text>
         </svg>
       </div>
-      <div class="cord-track">
-        <div class="cord-fill" id="cordFill"></div>
-        <span class="cord-pulse"></span>
-      </div>
-      <button class="handle" id="handle" type="button" aria-label="Drag down, or press Enter, to open the site">
+      <div class="cord-track"><div class="cord-fill" id="cordFill"></div><span class="cord-pulse"></span></div>
+      <button class="handle-btn" id="handle" type="button" aria-label="Drag down or press Enter to enter">
         <span class="chev-stack"><span class="chev"></span><span class="chev"></span></span>
       </button>
-      <div class="splash-copy">
-        <p class="splash-instruction">Drag to enter</p>
-        <p class="splash-sub">or press <kbd>Enter</kbd></p>
-        <p class="splash-readout" id="splashReadout" aria-live="polite">00%</p>
+      <div class="sp-copy">
+        <p class="sp-inst">Drag to enter</p>
+        <p class="sp-sub">or press <kbd>Enter</kbd></p>
+        <p class="sp-readout" id="spRO" aria-live="polite">00%</p>
       </div>
     </div>
   </div>
 </div>
 
 <canvas id="ptc"></canvas>
+<div id="cur"></div>
+<div id="cur-r"></div>
 
-<!-- ===== NAV ===== -->
+<!-- NAV -->
 <nav id="nav">
   <a class="nav-logo" href="#hero">Arjun <b>B.</b></a>
   <div class="nav-links">
     <button class="nb" data-t="frontend">Frontend</button>
     <button class="nb" data-t="backend">Backend</button>
+    <button class="nb" data-t="android">Android</button>
     <button class="nb" data-t="misc">Misc</button>
     <button class="nb" data-t="experience">Experience</button>
     <button class="nb" data-t="about">About</button>
@@ -416,105 +314,197 @@
   </div>
 </nav>
 
-<!-- ===== HERO ===== -->
+<!-- HERO -->
 <section id="hero">
   <video id="hvid" autoplay muted loop playsinline aria-hidden="true"><source src="motion-recording.mp4" type="video/mp4"/></video>
   <div class="hov-lay"></div>
   <div class="hero-copy">
-    <span class="hero-eyebrow">Full Stack Developer — Mumbai, IN</span>
+    <span class="hero-eyebrow">Full Stack &amp; Android Developer — Mumbai, IN</span>
     <h1 class="hero-title">Backend systems,<br/>built to <em>hold under load.</em></h1>
   </div>
   <div class="scroll-hint"><p>Scroll to explore</p><div class="scline"></div></div>
 </section>
 
-<!-- ===== FRONTEND ===== -->
+<!-- STATS -->
+<div class="stats">
+  <div class="si rv"><div class="si-fill"></div><div class="si-num">5<span style="color:var(--r);font-size:1.6rem">+</span></div><div class="si-lbl">Years Experience</div></div>
+  <div class="si rv d1"><div class="si-fill"></div><div class="si-num">40<span style="color:var(--r);font-size:1.6rem">%</span></div><div class="si-lbl">Automation Gains</div></div>
+  <div class="si rv d2"><div class="si-fill"></div><div class="si-num">3</div><div class="si-lbl">Countries Educated</div></div>
+  <div class="si rv d3"><div class="si-fill"></div><div class="si-num">∞</div><div class="si-lbl">Problems Solved</div></div>
+</div>
+
+<!-- FRONTEND -->
 <section id="frontend">
   <div class="fe-hdr rv"><div><span class="slbl">Frontend</span><h2 class="stitle">What <span class="ay">Users See</span></h2></div><div class="dir"><span>Left to Right</span><span class="darr">→</span></div></div>
   <div class="hso"><div class="hst fe-anim">
-    <div class="fc"><span class="fnum">01</span><div class="ftag">UI / UX Engineering</div><div class="ftitle">Responsive Web Interfaces</div><div class="fdesc">Pixel-perfect, mobile-first layouts with semantic HTML and modern CSS. Every breakpoint tested, every interaction considered for maximum usability across devices.</div><div class="pills"><span class="pl y">HTML5</span><span class="pl y">CSS3</span><span class="pl">Responsive</span><span class="pl">Accessibility</span></div></div>
-    <div class="fc"><span class="fnum">02</span><div class="ftag">Interactivity</div><div class="ftitle">Dynamic JavaScript Experiences</div><div class="fdesc">Vanilla JS powering interactive UIs — animated dashboards, real-time data displays, form validation, and micro-interactions that feel natural and fast.</div><div class="pills"><span class="pl y">JavaScript</span><span class="pl">ES6+</span><span class="pl">DOM API</span><span class="pl">Animations</span></div></div>
-    <div class="fc"><span class="fnum">03</span><div class="ftag">Web Applications</div><div class="ftitle">Full Client-Side Applications</div><div class="fdesc">Complete SPAs and multi-page apps with routing, state management, and seamless API integration — built for real-world scale and real users.</div><div class="pills"><span class="pl y">SPA</span><span class="pl">API Integration</span><span class="pl">State Mgmt</span><span class="pl">Routing</span></div></div>
-    <div class="fc"><span class="fnum">04</span><div class="ftag">Performance</div><div class="ftitle">Optimised Fast-Loading UIs</div><div class="fdesc">Code-splitting, lazy loading, caching strategies, and asset optimisation to hit sub-second load times even on constrained mobile networks and slow connections.</div><div class="pills"><span class="pl y">Core Web Vitals</span><span class="pl">Lazy Load</span><span class="pl">Minification</span><span class="pl">CDN</span></div></div>
-    <div class="fc"><span class="fnum">05</span><div class="ftag">Design Systems</div><div class="ftitle">Scalable Component Libraries</div><div class="fdesc">Reusable, consistent UI components as a single source of truth — buttons, forms, data tables, modals, and notification systems built once, used everywhere.</div><div class="pills"><span class="pl y">Components</span><span class="pl">CSS Variables</span><span class="pl r">Scalable</span><span class="pl">Tokens</span></div></div>
-    <div class="fc"><span class="fnum">06</span><div class="ftag">Client Projects</div><div class="ftitle">Digital Campaigns & Landing Pages</div><div class="fdesc">Fast-turnaround client sites and marketing pages with conversion-focused layouts, entrance animations, and CMS integrations for non-technical content teams.</div><div class="pills"><span class="pl y">Campaigns</span><span class="pl">CMS</span><span class="pl">Conversions</span><span class="pl">A/B Testing</span></div></div>
-    <div class="fc"><span class="fnum">07</span><div class="ftag">Accessibility</div><div class="ftitle">Usability & Accessibility First</div><div class="fdesc">WCAG principles baked in — keyboard navigation, screen reader support, ARIA roles, focus management, and colour contrast compliance on every project.</div><div class="pills"><span class="pl y">WCAG</span><span class="pl">ARIA</span><span class="pl">Inclusive Design</span><span class="pl">a11y</span></div></div>
-    <div class="fc"><span class="fnum">08</span><div class="ftag">Collaboration</div><div class="ftitle">Design-to-Dev Handoff</div><div class="fdesc">Bridging design and development — translating Figma mockups to production-ready code while communicating clearly with creative and product stakeholders.</div><div class="pills"><span class="pl y">Figma</span><span class="pl">Handoff</span><span class="pl r">Teamwork</span><span class="pl">Spec Review</span></div></div>
-    <!-- loop copy -->
-    <div class="fc"><span class="fnum">01</span><div class="ftag">UI / UX Engineering</div><div class="ftitle">Responsive Web Interfaces</div><div class="fdesc">Pixel-perfect, mobile-first layouts with semantic HTML and modern CSS. Every breakpoint tested, every interaction considered for maximum usability across devices.</div><div class="pills"><span class="pl y">HTML5</span><span class="pl y">CSS3</span><span class="pl">Responsive</span><span class="pl">Accessibility</span></div></div>
-    <div class="fc"><span class="fnum">02</span><div class="ftag">Interactivity</div><div class="ftitle">Dynamic JavaScript Experiences</div><div class="fdesc">Vanilla JS powering interactive UIs — animated dashboards, real-time data displays, form validation, and micro-interactions that feel natural and fast.</div><div class="pills"><span class="pl y">JavaScript</span><span class="pl">ES6+</span><span class="pl">DOM API</span><span class="pl">Animations</span></div></div>
-    <div class="fc"><span class="fnum">03</span><div class="ftag">Web Applications</div><div class="ftitle">Full Client-Side Applications</div><div class="fdesc">Complete SPAs and multi-page apps with routing, state management, and seamless API integration — built for real-world scale and real users.</div><div class="pills"><span class="pl y">SPA</span><span class="pl">API Integration</span><span class="pl">State Mgmt</span><span class="pl">Routing</span></div></div>
-    <div class="fc"><span class="fnum">04</span><div class="ftag">Performance</div><div class="ftitle">Optimised Fast-Loading UIs</div><div class="fdesc">Code-splitting, lazy loading, caching strategies, and asset optimisation to hit sub-second load times even on constrained mobile networks and slow connections.</div><div class="pills"><span class="pl y">Core Web Vitals</span><span class="pl">Lazy Load</span><span class="pl">Minification</span><span class="pl">CDN</span></div></div>
-    <div class="fc"><span class="fnum">05</span><div class="ftag">Design Systems</div><div class="ftitle">Scalable Component Libraries</div><div class="fdesc">Reusable, consistent UI components as a single source of truth — buttons, forms, data tables, modals, and notification systems built once, used everywhere.</div><div class="pills"><span class="pl y">Components</span><span class="pl">CSS Variables</span><span class="pl r">Scalable</span><span class="pl">Tokens</span></div></div>
-    <div class="fc"><span class="fnum">06</span><div class="ftag">Client Projects</div><div class="ftitle">Digital Campaigns & Landing Pages</div><div class="fdesc">Fast-turnaround client sites and marketing pages with conversion-focused layouts, entrance animations, and CMS integrations for non-technical content teams.</div><div class="pills"><span class="pl y">Campaigns</span><span class="pl">CMS</span><span class="pl">Conversions</span><span class="pl">A/B Testing</span></div></div>
-    <div class="fc"><span class="fnum">07</span><div class="ftag">Accessibility</div><div class="ftitle">Usability & Accessibility First</div><div class="fdesc">WCAG principles baked in — keyboard navigation, screen reader support, ARIA roles, focus management, and colour contrast compliance on every project.</div><div class="pills"><span class="pl y">WCAG</span><span class="pl">ARIA</span><span class="pl">Inclusive Design</span><span class="pl">a11y</span></div></div>
-    <div class="fc"><span class="fnum">08</span><div class="ftag">Collaboration</div><div class="ftitle">Design-to-Dev Handoff</div><div class="fdesc">Bridging design and development — translating Figma mockups to production-ready code while communicating clearly with creative and product stakeholders.</div><div class="pills"><span class="pl y">Figma</span><span class="pl">Handoff</span><span class="pl r">Teamwork</span><span class="pl">Spec Review</span></div></div>
+    <div class="fc"><span class="fnum">01</span><div class="ftag">UI / UX Engineering</div><div class="ftitle">Responsive Web Interfaces</div><div class="fdesc">Pixel-perfect, mobile-first layouts with semantic HTML5 and modern CSS3. Every breakpoint tested, every interaction considered for cross-browser compatibility.</div><div class="pills"><span class="pl y">HTML5</span><span class="pl y">CSS3</span><span class="pl">Responsive</span><span class="pl">Cross-Browser</span></div></div>
+    <div class="fc"><span class="fnum">02</span><div class="ftag">Interactivity</div><div class="ftitle">Dynamic JavaScript & jQuery</div><div class="fdesc">Vanilla JS and jQuery powering interactive UIs — AJAX data fetches, animated dashboards, real-time updates, form validation, and smooth DOM interactions.</div><div class="pills"><span class="pl y">JavaScript</span><span class="pl y">jQuery</span><span class="pl">AJAX</span><span class="pl">ES6+</span></div></div>
+    <div class="fc"><span class="fnum">03</span><div class="ftag">CSS Frameworks</div><div class="ftitle">Bootstrap & Tailwind CSS</div><div class="fdesc">Rapid UI development with Bootstrap grid systems and component libraries alongside utility-first Tailwind CSS for custom, consistent design at scale.</div><div class="pills"><span class="pl y">Bootstrap</span><span class="pl y">Tailwind CSS</span><span class="pl">CSS Grid</span><span class="pl">Flexbox</span></div></div>
+    <div class="fc"><span class="fnum">04</span><div class="ftag">Web Applications</div><div class="ftitle">Full Client-Side Applications</div><div class="fdesc">Complete SPAs and multi-page apps with routing, state management, JSON/XML data processing, and seamless API integration built for real-world scale.</div><div class="pills"><span class="pl y">SPA</span><span class="pl">JSON/XML</span><span class="pl">State Mgmt</span><span class="pl">Routing</span></div></div>
+    <div class="fc"><span class="fnum">05</span><div class="ftag">Performance</div><div class="ftitle">Optimised Fast-Loading UIs</div><div class="fdesc">Code-splitting, lazy loading, caching strategies, asset minification and CDN delivery to hit sub-second load times on constrained mobile networks.</div><div class="pills"><span class="pl y">Core Web Vitals</span><span class="pl">Lazy Load</span><span class="pl">Minification</span><span class="pl">CDN</span></div></div>
+    <div class="fc"><span class="fnum">06</span><div class="ftag">Admin Systems</div><div class="ftitle">Admin Panels & Dashboards</div><div class="fdesc">Scalable admin panels, reporting dashboards, CRM frontends, and ERP interfaces built for complex business workflows and large data volumes.</div><div class="pills"><span class="pl y">Admin Panels</span><span class="pl">Dashboards</span><span class="pl r">CRM</span><span class="pl">ERP UI</span></div></div>
+    <div class="fc"><span class="fnum">07</span><div class="ftag">Accessibility</div><div class="ftitle">Usability & Accessibility First</div><div class="fdesc">WCAG principles baked in — keyboard navigation, ARIA roles, screen reader support, focus management, and colour contrast compliance across every project.</div><div class="pills"><span class="pl y">WCAG</span><span class="pl">ARIA</span><span class="pl">a11y</span><span class="pl">Inclusive</span></div></div>
+    <div class="fc"><span class="fnum">08</span><div class="ftag">Collaboration</div><div class="ftitle">Design-to-Dev Handoff</div><div class="fdesc">Translating design mockups to production-ready code — pixel-precise implementation with clear communication to creative and product stakeholders throughout.</div><div class="pills"><span class="pl y">Figma</span><span class="pl">Handoff</span><span class="pl r">Teamwork</span><span class="pl">Spec Review</span></div></div>
+    <!-- LOOP COPY -->
+    <div class="fc"><span class="fnum">01</span><div class="ftag">UI / UX Engineering</div><div class="ftitle">Responsive Web Interfaces</div><div class="fdesc">Pixel-perfect, mobile-first layouts with semantic HTML5 and modern CSS3. Every breakpoint tested, every interaction considered for cross-browser compatibility.</div><div class="pills"><span class="pl y">HTML5</span><span class="pl y">CSS3</span><span class="pl">Responsive</span><span class="pl">Cross-Browser</span></div></div>
+    <div class="fc"><span class="fnum">02</span><div class="ftag">Interactivity</div><div class="ftitle">Dynamic JavaScript & jQuery</div><div class="fdesc">Vanilla JS and jQuery powering interactive UIs — AJAX data fetches, animated dashboards, real-time updates, form validation, and smooth DOM interactions.</div><div class="pills"><span class="pl y">JavaScript</span><span class="pl y">jQuery</span><span class="pl">AJAX</span><span class="pl">ES6+</span></div></div>
+    <div class="fc"><span class="fnum">03</span><div class="ftag">CSS Frameworks</div><div class="ftitle">Bootstrap & Tailwind CSS</div><div class="fdesc">Rapid UI development with Bootstrap grid systems and component libraries alongside utility-first Tailwind CSS for custom, consistent design at scale.</div><div class="pills"><span class="pl y">Bootstrap</span><span class="pl y">Tailwind CSS</span><span class="pl">CSS Grid</span><span class="pl">Flexbox</span></div></div>
+    <div class="fc"><span class="fnum">04</span><div class="ftag">Web Applications</div><div class="ftitle">Full Client-Side Applications</div><div class="fdesc">Complete SPAs and multi-page apps with routing, state management, JSON/XML data processing, and seamless API integration built for real-world scale.</div><div class="pills"><span class="pl y">SPA</span><span class="pl">JSON/XML</span><span class="pl">State Mgmt</span><span class="pl">Routing</span></div></div>
+    <div class="fc"><span class="fnum">05</span><div class="ftag">Performance</div><div class="ftitle">Optimised Fast-Loading UIs</div><div class="fdesc">Code-splitting, lazy loading, caching strategies, asset minification and CDN delivery to hit sub-second load times on constrained mobile networks.</div><div class="pills"><span class="pl y">Core Web Vitals</span><span class="pl">Lazy Load</span><span class="pl">Minification</span><span class="pl">CDN</span></div></div>
+    <div class="fc"><span class="fnum">06</span><div class="ftag">Admin Systems</div><div class="ftitle">Admin Panels & Dashboards</div><div class="fdesc">Scalable admin panels, reporting dashboards, CRM frontends, and ERP interfaces built for complex business workflows and large data volumes.</div><div class="pills"><span class="pl y">Admin Panels</span><span class="pl">Dashboards</span><span class="pl r">CRM</span><span class="pl">ERP UI</span></div></div>
   </div></div>
 </section>
 
 <div class="dv"></div>
-<div class="mq dk"><div class="mqt"><div class="mqi">HTML <div class="mqd"></div> CSS <div class="mqd"></div> JavaScript <div class="mqd"></div> Responsive <div class="mqd"></div> UI Design <div class="mqd"></div> Web Performance <div class="mqd"></div> Accessibility <div class="mqd"></div> SPA <div class="mqd"></div> Figma Handoff <div class="mqd"></div> Animations <div class="mqd"></div></div><div class="mqi">HTML <div class="mqd"></div> CSS <div class="mqd"></div> JavaScript <div class="mqd"></div> Responsive <div class="mqd"></div> UI Design <div class="mqd"></div> Web Performance <div class="mqd"></div> Accessibility <div class="mqd"></div> SPA <div class="mqd"></div> Figma Handoff <div class="mqd"></div> Animations <div class="mqd"></div></div></div></div>
+<div class="mq dk"><div class="mqt"><div class="mqi">HTML5 <div class="mqd"></div> CSS3 <div class="mqd"></div> JavaScript <div class="mqd"></div> jQuery <div class="mqd"></div> AJAX <div class="mqd"></div> Bootstrap <div class="mqd"></div> Tailwind <div class="mqd"></div> Responsive <div class="mqd"></div> Admin Panels <div class="mqd"></div> Dashboards <div class="mqd"></div></div><div class="mqi">HTML5 <div class="mqd"></div> CSS3 <div class="mqd"></div> JavaScript <div class="mqd"></div> jQuery <div class="mqd"></div> AJAX <div class="mqd"></div> Bootstrap <div class="mqd"></div> Tailwind <div class="mqd"></div> Responsive <div class="mqd"></div> Admin Panels <div class="mqd"></div> Dashboards <div class="mqd"></div></div></div></div>
 
-<!-- ===== BACKEND ===== -->
+<!-- BACKEND -->
 <section id="backend">
   <div class="be-hdr rv"><div><span class="slbl">Backend</span><h2 class="stitle">What <span class="ar">Powers It</span></h2></div><div class="dir"><span style="color:var(--r)">Right to Left</span><span class="darr" style="color:var(--r);animation-direction:reverse">←</span></div></div>
   <div class="hso"><div class="hst be-anim">
-    <div class="bc"><span class="fnum">01</span><div class="btag">Server-Side</div><div class="ftitle">PHP & Node.js Backend Systems</div><div class="fdesc">Robust server-side applications using PHP with MVC architecture and Node.js for event-driven, high-throughput APIs and scalable microservices in production.</div><div class="pills"><span class="pl r">PHP</span><span class="pl r">Node.js</span><span class="pl">MVC</span><span class="pl">Express</span></div></div>
-    <div class="bc"><span class="fnum">02</span><div class="btag">Databases</div><div class="ftitle">Multi-Database Architecture</div><div class="fdesc">Schema design and optimisation across relational and NoSQL systems — query tuning, indexing strategies, and replication setups that hold under real load.</div><div class="pills"><span class="pl r">MySQL</span><span class="pl r">PostgreSQL</span><span class="pl">MongoDB</span><span class="pl">Query Tuning</span></div></div>
-    <div class="bc"><span class="fnum">03</span><div class="btag">REST APIs</div><div class="ftitle">API Development & Integration</div><div class="fdesc">Designed and consumed RESTful APIs — auth flows, rate limiting, webhook systems, and integrations with payment gateways and external third-party services.</div><div class="pills"><span class="pl r">REST</span><span class="pl">JWT</span><span class="pl">OAuth</span><span class="pl">Webhooks</span></div></div>
-    <div class="bc"><span class="fnum">04</span><div class="btag">Automation</div><div class="ftitle">Workflow Automation Systems</div><div class="fdesc">Built automation pipelines cutting manual tasks by up to 40% — content management, reporting, client comms, and deployment flows running on autopilot.</div><div class="pills"><span class="pl r">Automation</span><span class="pl">CRON</span><span class="pl">Queues</span><span class="pl y">40% Savings</span></div></div>
-    <div class="bc"><span class="fnum">05</span><div class="btag">DevOps</div><div class="ftitle">Docker & Linux Deployment</div><div class="fdesc">Containerised apps with Docker, managed Linux servers, configured SSL, handled domain routing, and maintained production environments from day one to indefinitely.</div><div class="pills"><span class="pl r">Docker</span><span class="pl">Linux</span><span class="pl">SSL</span><span class="pl">Nginx</span></div></div>
-    <div class="bc"><span class="fnum">06</span><div class="btag">Security</div><div class="ftitle">Auth, RBAC & Security Hardening</div><div class="fdesc">JWT auth, Role-Based Access Control, input sanitisation, SQL injection prevention, and OWASP-aligned security auditing across live applications handling real user data.</div><div class="pills"><span class="pl r">JWT</span><span class="pl">RBAC</span><span class="pl">OWASP</span><span class="pl">Encryption</span></div></div>
-    <div class="bc"><span class="fnum">07</span><div class="btag">Scalability</div><div class="ftitle">High-Traffic Backend Architecture</div><div class="fdesc">Designed for growth — caching layers, connection pooling, load strategies, and performance profiling under real traffic spikes and operational pressure.</div><div class="pills"><span class="pl r">Caching</span><span class="pl">Load Balancing</span><span class="pl">Connection Pooling</span></div></div>
-    <div class="bc"><span class="fnum">08</span><div class="btag">Version Control</div><div class="ftitle">Git & CI/CD Workflows</div><div class="fdesc">Git-first across all projects — branching strategies, code reviews, CI/CD pipeline integration, and release management for solo and distributed team environments.</div><div class="pills"><span class="pl r">Git</span><span class="pl">CI/CD</span><span class="pl">Code Review</span><span class="pl">Branching</span></div></div>
-    <!-- loop copy -->
-    <div class="bc"><span class="fnum">01</span><div class="btag">Server-Side</div><div class="ftitle">PHP & Node.js Backend Systems</div><div class="fdesc">Robust server-side applications using PHP with MVC architecture and Node.js for event-driven, high-throughput APIs and scalable microservices in production.</div><div class="pills"><span class="pl r">PHP</span><span class="pl r">Node.js</span><span class="pl">MVC</span><span class="pl">Express</span></div></div>
-    <div class="bc"><span class="fnum">02</span><div class="btag">Databases</div><div class="ftitle">Multi-Database Architecture</div><div class="fdesc">Schema design and optimisation across relational and NoSQL systems — query tuning, indexing strategies, and replication setups that hold under real load.</div><div class="pills"><span class="pl r">MySQL</span><span class="pl r">PostgreSQL</span><span class="pl">MongoDB</span><span class="pl">Query Tuning</span></div></div>
-    <div class="bc"><span class="fnum">03</span><div class="btag">REST APIs</div><div class="ftitle">API Development & Integration</div><div class="fdesc">Designed and consumed RESTful APIs — auth flows, rate limiting, webhook systems, and integrations with payment gateways and external third-party services.</div><div class="pills"><span class="pl r">REST</span><span class="pl">JWT</span><span class="pl">OAuth</span><span class="pl">Webhooks</span></div></div>
-    <div class="bc"><span class="fnum">04</span><div class="btag">Automation</div><div class="ftitle">Workflow Automation Systems</div><div class="fdesc">Built automation pipelines cutting manual tasks by up to 40% — content management, reporting, client comms, and deployment flows running on autopilot.</div><div class="pills"><span class="pl r">Automation</span><span class="pl">CRON</span><span class="pl">Queues</span><span class="pl y">40% Savings</span></div></div>
-    <div class="bc"><span class="fnum">05</span><div class="btag">DevOps</div><div class="ftitle">Docker & Linux Deployment</div><div class="fdesc">Containerised apps with Docker, managed Linux servers, configured SSL, handled domain routing, and maintained production environments from day one to indefinitely.</div><div class="pills"><span class="pl r">Docker</span><span class="pl">Linux</span><span class="pl">SSL</span><span class="pl">Nginx</span></div></div>
-    <div class="bc"><span class="fnum">06</span><div class="btag">Security</div><div class="ftitle">Auth, RBAC & Security Hardening</div><div class="fdesc">JWT auth, Role-Based Access Control, input sanitisation, SQL injection prevention, and OWASP-aligned security auditing across live applications handling real user data.</div><div class="pills"><span class="pl r">JWT</span><span class="pl">RBAC</span><span class="pl">OWASP</span><span class="pl">Encryption</span></div></div>
-    <div class="bc"><span class="fnum">07</span><div class="btag">Scalability</div><div class="ftitle">High-Traffic Backend Architecture</div><div class="fdesc">Designed for growth — caching layers, connection pooling, load strategies, and performance profiling under real traffic spikes and operational pressure.</div><div class="pills"><span class="pl r">Caching</span><span class="pl">Load Balancing</span><span class="pl">Connection Pooling</span></div></div>
-    <div class="bc"><span class="fnum">08</span><div class="btag">Version Control</div><div class="ftitle">Git & CI/CD Workflows</div><div class="fdesc">Git-first across all projects — branching strategies, code reviews, CI/CD pipeline integration, and release management for solo and distributed team environments.</div><div class="pills"><span class="pl r">Git</span><span class="pl">CI/CD</span><span class="pl">Code Review</span><span class="pl">Branching</span></div></div>
+    <div class="bc"><span class="fnum">01</span><div class="btag">Server-Side</div><div class="ftitle">PHP & Node.js Backend Systems</div><div class="fdesc">Robust server-side applications using PHP with MVC and OOP architecture, and Node.js for event-driven, high-throughput APIs and scalable microservices.</div><div class="pills"><span class="pl r">PHP</span><span class="pl r">Node.js</span><span class="pl">MVC</span><span class="pl">OOP</span><span class="pl">Composer</span></div></div>
+    <div class="bc"><span class="fnum">02</span><div class="btag">Databases</div><div class="ftitle">Multi-Database Architecture</div><div class="fdesc">Schema design, SQL query optimisation, indexing, backup management, and data integrity assurance across MySQL, PostgreSQL, MongoDB, and SQLite in production.</div><div class="pills"><span class="pl r">MySQL</span><span class="pl r">PostgreSQL</span><span class="pl">MongoDB</span><span class="pl">SQLite</span><span class="pl">SQL Opt.</span></div></div>
+    <div class="bc"><span class="fnum">03</span><div class="btag">REST APIs</div><div class="ftitle">API Dev, Integration & Testing</div><div class="fdesc">Designed and consumed RESTful APIs — JWT auth, rate limiting, webhooks, payment gateways, WhatsApp API, Firebase, SMTP, and third-party business platforms.</div><div class="pills"><span class="pl r">REST</span><span class="pl">JWT</span><span class="pl">WhatsApp API</span><span class="pl">Firebase</span><span class="pl">Postman</span></div></div>
+    <div class="bc"><span class="fnum">04</span><div class="btag">Automation</div><div class="ftitle">Workflow & Business Automation</div><div class="fdesc">Custom automation pipelines — CRON jobs, email services (SMTP), reporting modules, notification systems, and file management reducing manual effort by 35–40%.</div><div class="pills"><span class="pl r">Automation</span><span class="pl">CRON Jobs</span><span class="pl">SMTP</span><span class="pl y">35–40% Saved</span></div></div>
+    <div class="bc"><span class="fnum">05</span><div class="btag">DevOps</div><div class="ftitle">Docker, Linux & Server Management</div><div class="fdesc">Containerised apps with Docker, managed Apache/Nginx on Linux, configured SSL/TLS, handled domain/DNS, and maintained production environments end-to-end.</div><div class="pills"><span class="pl r">Docker</span><span class="pl">Linux</span><span class="pl">Apache</span><span class="pl">Nginx</span><span class="pl">SSL/TLS</span></div></div>
+    <div class="bc"><span class="fnum">06</span><div class="btag">Security</div><div class="ftitle">Auth, RBAC & Secure Coding</div><div class="fdesc">JWT auth, session management, Role-Based Access Control, input validation, data sanitisation, OWASP practices, and security auditing on all live applications.</div><div class="pills"><span class="pl r">JWT</span><span class="pl">RBAC</span><span class="pl">OWASP</span><span class="pl">Validation</span><span class="pl">Encryption</span></div></div>
+    <div class="bc"><span class="fnum">07</span><div class="btag">Scalability</div><div class="ftitle">High-Traffic Backend Architecture</div><div class="fdesc">Scalable architectures for growing traffic — caching techniques, connection pooling, load strategies, performance profiling, and cloud deployment automation.</div><div class="pills"><span class="pl r">Caching</span><span class="pl">Load Balancing</span><span class="pl">Cloud</span><span class="pl">CI/CD</span></div></div>
+    <div class="bc"><span class="fnum">08</span><div class="btag">Enterprise Systems</div><div class="ftitle">ERP, CRM & Management Systems</div><div class="fdesc">Built scalable admin panels, ERP solutions, CRM systems, inventory management, billing systems, hospital management, and POS systems from scratch.</div><div class="pills"><span class="pl r">ERP</span><span class="pl">CRM</span><span class="pl">Inventory</span><span class="pl">POS</span><span class="pl">Hospital Mgmt</span></div></div>
+    <!-- LOOP COPY -->
+    <div class="bc"><span class="fnum">01</span><div class="btag">Server-Side</div><div class="ftitle">PHP & Node.js Backend Systems</div><div class="fdesc">Robust server-side applications using PHP with MVC and OOP architecture, and Node.js for event-driven, high-throughput APIs and scalable microservices.</div><div class="pills"><span class="pl r">PHP</span><span class="pl r">Node.js</span><span class="pl">MVC</span><span class="pl">OOP</span><span class="pl">Composer</span></div></div>
+    <div class="bc"><span class="fnum">02</span><div class="btag">Databases</div><div class="ftitle">Multi-Database Architecture</div><div class="fdesc">Schema design, SQL query optimisation, indexing, backup management, and data integrity assurance across MySQL, PostgreSQL, MongoDB, and SQLite in production.</div><div class="pills"><span class="pl r">MySQL</span><span class="pl r">PostgreSQL</span><span class="pl">MongoDB</span><span class="pl">SQLite</span><span class="pl">SQL Opt.</span></div></div>
+    <div class="bc"><span class="fnum">03</span><div class="btag">REST APIs</div><div class="ftitle">API Dev, Integration & Testing</div><div class="fdesc">Designed and consumed RESTful APIs — JWT auth, rate limiting, webhooks, payment gateways, WhatsApp API, Firebase, SMTP, and third-party business platforms.</div><div class="pills"><span class="pl r">REST</span><span class="pl">JWT</span><span class="pl">WhatsApp API</span><span class="pl">Firebase</span><span class="pl">Postman</span></div></div>
+    <div class="bc"><span class="fnum">04</span><div class="btag">Automation</div><div class="ftitle">Workflow & Business Automation</div><div class="fdesc">Custom automation pipelines — CRON jobs, email services (SMTP), reporting modules, notification systems, and file management reducing manual effort by 35–40%.</div><div class="pills"><span class="pl r">Automation</span><span class="pl">CRON Jobs</span><span class="pl">SMTP</span><span class="pl y">35–40% Saved</span></div></div>
+    <div class="bc"><span class="fnum">05</span><div class="btag">DevOps</div><div class="ftitle">Docker, Linux & Server Management</div><div class="fdesc">Containerised apps with Docker, managed Apache/Nginx on Linux, configured SSL/TLS, handled domain/DNS, and maintained production environments end-to-end.</div><div class="pills"><span class="pl r">Docker</span><span class="pl">Linux</span><span class="pl">Apache</span><span class="pl">Nginx</span><span class="pl">SSL/TLS</span></div></div>
   </div></div>
 </section>
 
 <div class="dv r"></div>
-<div class="mq"><div class="mqt rev"><div class="mqi">PHP <div class="mqd r"></div> Node.js <div class="mqd r"></div> MySQL <div class="mqd r"></div> PostgreSQL <div class="mqd r"></div> MongoDB <div class="mqd r"></div> Docker <div class="mqd r"></div> REST APIs <div class="mqd r"></div> JWT Auth <div class="mqd r"></div> Linux <div class="mqd r"></div> Git <div class="mqd r"></div> CI/CD <div class="mqd r"></div></div><div class="mqi">PHP <div class="mqd r"></div> Node.js <div class="mqd r"></div> MySQL <div class="mqd r"></div> PostgreSQL <div class="mqd r"></div> MongoDB <div class="mqd r"></div> Docker <div class="mqd r"></div> REST APIs <div class="mqd r"></div> JWT Auth <div class="mqd r"></div> Linux <div class="mqd r"></div> Git <div class="mqd r"></div> CI/CD <div class="mqd r"></div></div></div></div>
+<div class="mq"><div class="mqt rev"><div class="mqi">PHP <div class="mqd r"></div> Node.js <div class="mqd r"></div> MySQL <div class="mqd r"></div> PostgreSQL <div class="mqd r"></div> MongoDB <div class="mqd r"></div> Docker <div class="mqd r"></div> REST APIs <div class="mqd r"></div> JWT <div class="mqd r"></div> WhatsApp API <div class="mqd r"></div> Firebase <div class="mqd r"></div> ERP <div class="mqd r"></div> CRM <div class="mqd r"></div> Linux <div class="mqd r"></div></div><div class="mqi">PHP <div class="mqd r"></div> Node.js <div class="mqd r"></div> MySQL <div class="mqd r"></div> PostgreSQL <div class="mqd r"></div> MongoDB <div class="mqd r"></div> Docker <div class="mqd r"></div> REST APIs <div class="mqd r"></div> JWT <div class="mqd r"></div> WhatsApp API <div class="mqd r"></div> Firebase <div class="mqd r"></div> ERP <div class="mqd r"></div> CRM <div class="mqd r"></div> Linux <div class="mqd r"></div></div></div></div>
 
-<!-- ===== MISC ===== -->
+<!-- ANDROID -->
+<section id="android" style="padding:6rem 0 2rem;background:var(--bg)">
+  <div class="fe-hdr rv"><div><span class="slbl">Android Development</span><h2 class="stitle">Native <span class="ay">Mobile Apps</span></h2></div><div class="dir"><span>Left to Right</span><span class="darr">→</span></div></div>
+  <div class="hso"><div class="hst fe-anim">
+    <div class="fc"><span class="fnum">01</span><div class="ftag">Native Android</div><div class="ftitle">Java & Kotlin Development</div><div class="fdesc">Native Android applications built in Java and Kotlin using Android Studio — from architecture planning to production deployment on Google Play.</div><div class="pills"><span class="pl y">Java</span><span class="pl y">Kotlin</span><span class="pl">Android Studio</span><span class="pl">Gradle</span></div></div>
+    <div class="fc"><span class="fnum">02</span><div class="ftag">UI / UX</div><div class="ftitle">Material Design & Android UI</div><div class="fdesc">Beautiful, intuitive Android UIs following Material Design principles — custom components, animations, navigation graphs, and adaptive layouts for all screen sizes.</div><div class="pills"><span class="pl y">Material Design</span><span class="pl">XML Layouts</span><span class="pl">Navigation</span><span class="pl">Animations</span></div></div>
+    <div class="fc"><span class="fnum">03</span><div class="ftag">Firebase</div><div class="ftitle">Firebase Integration</div><div class="fdesc">Full Firebase suite integration — Authentication, Firestore, Realtime Database, Cloud Storage, Cloud Messaging (FCM push notifications), and Analytics.</div><div class="pills"><span class="pl y">Firebase Auth</span><span class="pl y">FCM</span><span class="pl">Firestore</span><span class="pl">Analytics</span></div></div>
+    <div class="fc"><span class="fnum">04</span><div class="ftag">Local Storage</div><div class="ftitle">SQLite & SharedPreferences</div><div class="fdesc">Efficient local data management using SQLite databases for structured data storage and SharedPreferences for lightweight user settings and session data.</div><div class="pills"><span class="pl y">SQLite</span><span class="pl">SharedPrefs</span><span class="pl">Room DB</span><span class="pl">Offline First</span></div></div>
+    <div class="fc"><span class="fnum">05</span><div class="ftag">API Connectivity</div><div class="ftitle">REST API & Backend Integration</div><div class="fdesc">Connecting Android apps to server-side systems — REST API consumption, JWT auth, payment gateway integration, WhatsApp API, and real-time data synchronisation.</div><div class="pills"><span class="pl y">Retrofit</span><span class="pl">OkHttp</span><span class="pl">REST APIs</span><span class="pl">WhatsApp API</span></div></div>
+    <div class="fc"><span class="fnum">06</span><div class="ftag">Push Notifications</div><div class="ftitle">Notifications & Background Services</div><div class="fdesc">Push notification systems via FCM, background services, WorkManager for scheduled tasks, and broadcast receivers for event-driven Android workflows.</div><div class="pills"><span class="pl y">FCM</span><span class="pl">WorkManager</span><span class="pl">Background</span><span class="pl">Broadcast</span></div></div>
+    <div class="fc"><span class="fnum">07</span><div class="ftag">Performance</div><div class="ftitle">App Optimisation & Security</div><div class="fdesc">App performance tuning, memory management, ProGuard obfuscation, secure coding practices, input validation, and role-based access control within Android apps.</div><div class="pills"><span class="pl y">ProGuard</span><span class="pl">Memory Mgmt</span><span class="pl">Secure Coding</span><span class="pl">RBAC</span></div></div>
+    <div class="fc"><span class="fnum">08</span><div class="ftag">Version Control</div><div class="ftitle">Git, GitHub & Collaborative Dev</div><div class="fdesc">Android projects version-controlled with Git/GitHub/GitLab — feature branching, code reviews, CI/CD pipelines, and release management across teams.</div><div class="pills"><span class="pl y">Git</span><span class="pl">GitHub</span><span class="pl">GitLab</span><span class="pl">CI/CD</span></div></div>
+    <!-- LOOP COPY -->
+    <div class="fc"><span class="fnum">01</span><div class="ftag">Native Android</div><div class="ftitle">Java & Kotlin Development</div><div class="fdesc">Native Android applications built in Java and Kotlin using Android Studio — from architecture planning to production deployment on Google Play.</div><div class="pills"><span class="pl y">Java</span><span class="pl y">Kotlin</span><span class="pl">Android Studio</span><span class="pl">Gradle</span></div></div>
+    <div class="fc"><span class="fnum">02</span><div class="ftag">UI / UX</div><div class="ftitle">Material Design & Android UI</div><div class="fdesc">Beautiful, intuitive Android UIs following Material Design principles — custom components, animations, navigation graphs, and adaptive layouts for all screen sizes.</div><div class="pills"><span class="pl y">Material Design</span><span class="pl">XML Layouts</span><span class="pl">Navigation</span><span class="pl">Animations</span></div></div>
+    <div class="fc"><span class="fnum">03</span><div class="ftag">Firebase</div><div class="ftitle">Firebase Integration</div><div class="fdesc">Full Firebase suite integration — Authentication, Firestore, Realtime Database, Cloud Storage, Cloud Messaging (FCM push notifications), and Analytics.</div><div class="pills"><span class="pl y">Firebase Auth</span><span class="pl y">FCM</span><span class="pl">Firestore</span><span class="pl">Analytics</span></div></div>
+    <div class="fc"><span class="fnum">04</span><div class="ftag">Local Storage</div><div class="ftitle">SQLite & SharedPreferences</div><div class="fdesc">Efficient local data management using SQLite databases for structured data storage and SharedPreferences for lightweight user settings and session data.</div><div class="pills"><span class="pl y">SQLite</span><span class="pl">SharedPrefs</span><span class="pl">Room DB</span><span class="pl">Offline First</span></div></div>
+  </div></div>
+</section>
+
+<div class="dv"></div>
+<div class="mq dk"><div class="mqt"><div class="mqi">Java <div class="mqd"></div> Kotlin <div class="mqd"></div> Android Studio <div class="mqd"></div> Material Design <div class="mqd"></div> Firebase <div class="mqd"></div> FCM <div class="mqd"></div> SQLite <div class="mqd"></div> Retrofit <div class="mqd"></div> Gradle <div class="mqd"></div> Push Notifications <div class="mqd"></div></div><div class="mqi">Java <div class="mqd"></div> Kotlin <div class="mqd"></div> Android Studio <div class="mqd"></div> Material Design <div class="mqd"></div> Firebase <div class="mqd"></div> FCM <div class="mqd"></div> SQLite <div class="mqd"></div> Retrofit <div class="mqd"></div> Gradle <div class="mqd"></div> Push Notifications <div class="mqd"></div></div></div></div>
+
+<!-- MISC -->
 <section id="misc">
   <span class="slbl rv">Miscellaneous</span><h2 class="stitle rv d1">Beyond the <span class="ay">Stack</span></h2>
   <div class="mg">
-    <div class="mc s7 rv"><span class="mbadge">Web3 & Blockchain</span><div class="mico">₿</div><div class="mtitle" style="font-size:1.2rem;margin-bottom:0.55rem">Bitcoin Wallet Integration & Crypto Payments</div><div class="mdesc">End-to-end cryptocurrency payment systems — wallet creation, balance management, transaction tracking, and API integrations with third-party blockchain services. Real money, real responsibility.</div><div class="pills" style="margin-top:1rem"><span class="pl y">Bitcoin</span><span class="pl">Wallet API</span><span class="pl">Crypto Payments</span><span class="pl">Web3</span><span class="pl y">Blockchain</span></div></div>
-    <div class="mc s5 rv d1"><span class="mbadge">Digital Assets</span><div class="mico">◈</div><div class="mtitle">NFT Generation & Minting</div><div class="mdesc">Programmatic NFT creation pipelines — generative art systems, metadata generation, IPFS storage, and smart contract deployment for complete NFT collections.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">NFTs</span><span class="pl">IPFS</span><span class="pl">Generative Art</span><span class="pl">Metadata</span></div></div>
-    <div class="mc s4 rv"><span class="mbadge r">DeFi & Contracts</span><div class="mico">⬡</div><div class="mtitle">Smart Contract Development</div><div class="mdesc">Writing, testing, and deploying smart contracts — transaction logic, escrow systems, token contracts, and on-chain automation for DeFi applications.</div><div class="pills" style="margin-top:.9rem"><span class="pl r">Solidity</span><span class="pl">Smart Contracts</span><span class="pl">DeFi</span></div></div>
-    <div class="mc s4 rv d1"><span class="mbadge">Creative</span><div class="mico">◉</div><div class="mtitle">Video & Image Editing</div><div class="mdesc">Post-production video, colour grading, motion graphics, and image retouching for digital campaigns, social content, and client deliverables.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">Video Edit</span><span class="pl">Motion Graphics</span><span class="pl">Photoshop</span></div></div>
-    <div class="mc s4 rv d2"><span class="mbadge r">Automation</span><div class="mico">⚙</div><div class="mtitle">Process & Bot Automation</div><div class="mdesc">Custom scripts and bots cutting manual work by 35–40% — content management, reporting pipelines, and client comms built for teams that move fast.</div><div class="pills" style="margin-top:.9rem"><span class="pl r">Bots</span><span class="pl">Scripts</span><span class="pl y">35–40% Faster</span></div></div>
-    <div class="mc s6 rv d1"><span class="mbadge">Consulting</span><div class="mico">✦</div><div class="mtitle">Technical Consulting & Strategy</div><div class="mdesc">Helping startups and clients plan architecture, choose the right stack, and execute — from idea to deployed product with full lifecycle coverage and ongoing support.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">Startups</span><span class="pl">Architecture</span><span class="pl">Full Lifecycle</span><span class="pl">Remote</span></div></div>
-    <div class="mc s6 rv d2"><span class="mbadge r">System Integration</span><div class="mico">⇄</div><div class="mtitle">Third-Party API & Service Integration</div><div class="mdesc">Connecting business tools — payment gateways, notification services, CRM systems, analytics, and auth providers into cohesive automated workflows.</div><div class="pills" style="margin-top:.9rem"><span class="pl r">Gateways</span><span class="pl">Notifications</span><span class="pl">CRM</span><span class="pl y">Unified Systems</span></div></div>
+    <div class="mc s7 rv"><span class="mbadge">Web3 & Blockchain</span><div class="mico">₿</div><div class="mtitle" style="font-size:1.1rem;margin-bottom:.5rem">Bitcoin Wallet Integration & Crypto Payments</div><div class="mdesc">End-to-end cryptocurrency payment systems — wallet creation, balance management, transaction tracking, and API integrations with third-party blockchain services. Real money, real responsibility.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">Bitcoin</span><span class="pl">Wallet API</span><span class="pl">Crypto Payments</span><span class="pl">Web3</span></div></div>
+    <div class="mc s5 rv d1"><span class="mbadge">Digital Assets</span><div class="mico">◈</div><div class="mtitle">NFT Generation & Minting</div><div class="mdesc">Programmatic NFT creation pipelines — generative art, metadata generation, IPFS storage, and smart contract deployment for complete NFT collections from scratch.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">NFTs</span><span class="pl">IPFS</span><span class="pl">Generative Art</span></div></div>
+    <div class="mc s4 rv"><span class="mbadge r">DeFi & Contracts</span><div class="mico">⬡</div><div class="mtitle">Smart Contract Development</div><div class="mdesc">Writing, testing, and deploying smart contracts — token contracts, escrow logic, transaction automation, and governance mechanisms for DeFi applications.</div><div class="pills" style="margin-top:.9rem"><span class="pl r">Solidity</span><span class="pl">Smart Contracts</span><span class="pl">DeFi</span></div></div>
+    <div class="mc s4 rv d1"><span class="mbadge">Creative</span><div class="mico">◉</div><div class="mtitle">Video & Image Editing</div><div class="mdesc">Post-production video, colour grading, motion graphics, and image retouching for digital campaigns, social content, and client deliverables.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">Video Edit</span><span class="pl">Motion</span><span class="pl">Photoshop</span></div></div>
+    <div class="mc s4 rv d2"><span class="mbadge r">Messaging</span><div class="mico">💬</div><div class="mtitle">WhatsApp API Integration</div><div class="mdesc">WhatsApp Business API integrations for automated client communications, notification systems, and customer support workflows inside web and mobile applications.</div><div class="pills" style="margin-top:.9rem"><span class="pl r">WhatsApp API</span><span class="pl">Automation</span><span class="pl">Notifications</span></div></div>
+    <div class="mc s6 rv d1"><span class="mbadge">Consulting</span><div class="mico">✦</div><div class="mtitle">Technical Consulting & Strategy</div><div class="mdesc">Helping startups and clients plan architecture, choose the right stack, and execute from idea to deployed product — full SDLC coverage from requirement analysis to post-launch support.</div><div class="pills" style="margin-top:.9rem"><span class="pl y">Startups</span><span class="pl">Architecture</span><span class="pl">SDLC</span><span class="pl">Remote</span></div></div>
+    <div class="mc s6 rv d2"><span class="mbadge r">Enterprise</span><div class="mico">⇄</div><div class="mtitle">ERP, CRM & Business Systems</div><div class="mdesc">Built from scratch: inventory management, billing systems, hospital management platforms, POS systems, reporting dashboards, and admin panels for enterprise clients.</div><div class="pills" style="margin-top:.9rem"><span class="pl r">ERP</span><span class="pl">CRM</span><span class="pl">Inventory</span><span class="pl y">Hospital Mgmt</span><span class="pl">POS</span></div></div>
   </div>
 </section>
 
-<!-- ===== EXPERIENCE ===== -->
+<!-- EXPERIENCE -->
 <section id="experience">
   <span class="slbl rv">Experience</span><h2 class="stitle rv d1">Where I've <span class="ar">Shipped</span></h2>
   <div class="eg">
-    <div class="ei rv"><div><div class="edate">Jul 2025 — Present</div><div class="eloc">Mumbai, IN</div></div><div><div class="eco">Technoweb Solutions</div><div class="erole">Backend Developer & Automation Associate</div><ul class="epts"><li>Architected and maintained backend workflows for multiple web platforms using PHP, Node.js, and modern database systems — ensuring reliability and uptime across all active deployments</li><li>Built end-to-end automation systems reducing repetitive operational tasks by approximately 35% across internal workflows, saving significant engineering hours every week</li><li>Designed and consumed REST APIs integrating payment gateways, notification services, third-party SaaS tools, and internal microservices into a unified backend architecture</li><li>Performed database management including schema design, query optimisation, indexing, and migration planning for MySQL and PostgreSQL production databases under live load</li><li>Led backend debugging and root cause analysis on critical production issues — reducing downtime and improving system stability with structured error handling and logging pipelines</li><li>Collaborated with cross-functional teams to streamline CI/CD deployment processes, cutting release cycle time and reducing manual deployment errors across environments</li><li>Implemented server-side performance optimisations including caching strategies, connection pooling, and query refactoring — measurably improving response times under high traffic</li><li>Managed Linux-based server environments, SSL certificate renewals, domain configurations, and production environment maintenance for all hosted client applications</li><li>Supported client-side technical operations, troubleshooting integrations, and monitoring platform performance across production and staging environments simultaneously</li></ul></div></div>
-    <div class="ei rv"><div><div class="edate">Jan 2024 — Present</div><div class="eloc">Mumbai, IN</div></div><div><div class="eco">The Control Room</div><div class="erole">Senior Developer & Automation Specialist</div><ul class="epts"><li>Led automation and development operations for multiple simultaneous digital and web-based projects — managing timelines, deliverables, and technical strategy concurrently across accounts</li><li>Designed automated workflows for content management, client reporting, and communication systems — reducing manual intervention by nearly 40% across all active client projects</li><li>Oversaw backend development, deployment support, and system maintenance for a portfolio of active web properties and digital platforms with diverse technical requirements</li><li>Coordinated directly with creative and technical teams to execute fast-turnaround digital campaigns and web solutions within tight client deadlines without compromising quality</li><li>Provided technical strategy planning and execution advisory — advising on stack selection, architecture decisions, and long-term scalability planning for growing client platforms</li><li>Implemented Docker containerisation across key projects to standardise development, testing, and deployment environments — reducing environment bugs and onboarding friction significantly</li></ul></div></div>
-    <div class="ei rv"><div><div class="edate">Jan 2021 — July 2021</div><div class="eloc">Mumbai, IN</div></div><div><div class="eco">Visom 6</div><div class="erole">Web Developer</div><ul class="epts"><li>Assisted in design, development, and optimisation of client-facing websites and web applications, contributing across both frontend and backend layers on live projects</li><li>Contributed to maintenance, troubleshooting, and regular updating of existing web platforms to ensure smooth performance and zero-downtime for end users at scale</li><li>Continuously researched and implemented new technologies, backend tools, and automation techniques to improve development workflows and delivery speed across the team</li><li>Participated in technical discussions, sprint planning, and project execution meetings — contributing to development strategy and team decision-making with practical input</li></ul></div></div>
-    <div class="ei rv"><div><div class="edate">Jul 2021 — Present</div><div class="eloc">Mumbai, IN</div></div><div><div class="eco">Freelance</div><div class="erole">Full-Stack Developer & Software Consultant</div><ul class="epts"><li>Delivered blockchain freelance projects involving cryptocurrency payment integrations, wallet-based functionalities, transaction tracking, and API integrations with third-party Web3 services</li><li>Designed and developed custom full-stack web applications using PHP, MySQL, JavaScript, HTML, and CSS — tailored precisely to specific client business requirements and operational workflows</li><li>Assisted startups and independent clients with backend development, workflow automation, database design, and process optimisation to improve efficiency and reduce operational overhead</li><li>Built and deployed NFT generation systems — including generative art pipelines, IPFS metadata storage, and smart contract deployment for complete client NFT collection launches</li><li>Implemented DeFi smart contracts — covering token contracts, escrow logic, transaction automation, and on-chain governance mechanisms for clients in the Web3 ecosystem</li><li>Managed end-to-end project delivery independently: requirement gathering, architecture planning, development, testing, deployment, and post-launch support across all client engagements</li><li>Collaborated with remote clients and distributed teams across different time zones to deliver solutions aligned with business goals and technical constraints without delays</li><li>Provided ongoing technical consulting and strategy advisory for early-stage startups choosing their first tech stack, infrastructure approach, and development roadmap with confidence</li></ul></div></div>
+
+    <div class="ei rv">
+      <div><div class="edate">Jul 2025 — Present</div><div class="eloc">Mumbai, IN</div></div>
+      <div>
+        <div class="eco">Technoweb Solutions</div>
+        <div class="erole">Backend Developer | Android Developer | Automation Associate</div>
+        <ul class="epts">
+          <li>Developed and maintained backend systems and Android applications using modern development frameworks, mobile technologies, and database systems</li>
+          <li>Built automation solutions reducing repetitive operational tasks by approximately 35% across internal business workflows</li>
+          <li>Developed and integrated REST APIs, implemented backend services, and connected Android applications with server-side systems seamlessly</li>
+          <li>Assisted in API integrations, backend debugging, server-side optimisation, database management, and Android application maintenance across active deployments</li>
+          <li>Collaborated with cross-functional teams to streamline deployment processes, improve application performance, and enhance overall system efficiency</li>
+          <li>Supported client-side technical operations, application troubleshooting, performance monitoring, and issue resolution across web and mobile platforms</li>
+          <li>Worked on scalable backend architectures and Android solutions capable of handling increasing traffic, users, and operational workloads</li>
+          <li>Implemented secure authentication, role-based access control, and data validation across both web and Android applications</li>
+          <li>Optimised application performance through efficient database queries, code refactoring, and resource utilisation for both backend services and mobile applications</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ei rv">
+      <div><div class="edate">Jan 2024 — Present</div><div class="eloc">Mumbai, IN</div></div>
+      <div>
+        <div class="eco">The Control Room</div>
+        <div class="erole">Senior Developer & Automation Specialist</div>
+        <ul class="epts">
+          <li>Led automation and development operations for multiple simultaneous digital and web-based projects — managing timelines, deliverables, and technical strategy concurrently</li>
+          <li>Designed automated workflows for content management, client reporting, and communication systems — reducing manual intervention by nearly 40% across all active accounts</li>
+          <li>Oversaw backend development, deployment support, and system maintenance for a portfolio of active web properties and digital platforms with diverse technical requirements</li>
+          <li>Coordinated directly with creative and technical teams to execute fast-turnaround digital campaigns and web solutions within tight client deadlines</li>
+          <li>Provided technical strategy planning and execution advisory — stack selection, architecture decisions, and long-term scalability planning for growing platforms</li>
+          <li>Implemented Docker containerisation across key projects to standardise development, testing, and deployment environments — reducing environment bugs significantly</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ei rv">
+      <div><div class="edate">Jan 2021 — Jul 2021</div><div class="eloc">Mumbai, IN</div></div>
+      <div>
+        <div class="eco">Visom 6</div>
+        <div class="erole">Web Developer</div>
+        <ul class="epts">
+          <li>Assisted in design, development, and optimisation of client-facing websites and web applications across frontend and backend layers on live projects</li>
+          <li>Contributed to maintenance, troubleshooting, and regular updating of existing web platforms to ensure smooth performance and zero-downtime for end users</li>
+          <li>Continuously researched and implemented new technologies, backend tools, and automation techniques to improve development workflows and delivery speed</li>
+          <li>Participated in technical discussions, sprint planning, and project execution meetings — contributing to development strategy with practical input</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ei rv">
+      <div><div class="edate">Jul 2021 — Present</div><div class="eloc">Mumbai, IN</div></div>
+      <div>
+        <div class="eco">Freelance</div>
+        <div class="erole">Full-Stack Developer & Software Consultant</div>
+        <ul class="epts">
+          <li>Developed and maintained full-stack web applications using PHP, Node.js, HTML5, CSS3, JavaScript, MySQL, PostgreSQL, and MongoDB across diverse client projects</li>
+          <li>Built and maintained Android applications using Java, Kotlin, Android Studio, SQLite, Firebase, and Material Design principles for startups and established businesses</li>
+          <li>Designed, developed, and integrated REST APIs, third-party APIs, payment gateways, WhatsApp APIs, Firebase services, and external business platforms</li>
+          <li>Delivered blockchain projects — cryptocurrency payment integrations, wallet-based functionalities, transaction tracking, NFT generation systems, and DeFi smart contracts</li>
+          <li>Built scalable admin panels, dashboards, CRM, ERP, inventory management, billing systems, hospital management solutions, and POS systems from the ground up</li>
+          <li>Automated workflows and business processes using CRON jobs, SMTP email integration, file management, and notification systems to reduce manual effort significantly</li>
+          <li>Managed Linux servers, Apache/Nginx configuration, domain/DNS management, SSL implementation, deployment automation, and production maintenance end-to-end</li>
+          <li>Developed reusable, modular code following OOP, MVC architecture, SDLC best practices, and Agile development methodologies across all client engagements</li>
+          <li>Collaborated with remote clients and distributed teams to gather requirements, provide technical recommendations, and deliver solutions aligned with business objectives</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
+<!-- ABOUT -->
 <section id="about">
   <span class="slbl rv">About</span><h2 class="stitle rv d1">The Person<br/><span class="ay">Behind the Code</span></h2>
   <div class="ag">
     <div>
-      <p class="aintro rv d2">I'm a <b>Full Stack Developer</b> based in Mumbai — the kind that doesn't stop at "it works." I think about what happens when it breaks, scales, and needs to be handed off to someone else at 2am.</p>
-      <p class="abody rv d3">My career spans backend systems, automation engineering, and Web3 development — held together by one belief: technology should remove friction, not create it. Whether designing a database schema, wiring up a payment gateway, or automating a client's reporting pipeline, I'm always optimising for fewer headaches and faster results.</p>
-      <p class="abody rv d4">Educated across three countries (India, the US, and the UK), working across multiple companies simultaneously, and freelancing for clients from solo founders to established agencies. Every project has taught me to move fast without cutting corners.</p>
-      <div class="rv"><div class="elbl">Education</div>
+      <p class="aintro rv d2">I'm a <b>Full Stack & Android Developer</b> based in Mumbai — the kind that doesn't stop at "it works." I think about what happens when it breaks, scales, and needs to be handed off at 2am.</p>
+      <p class="abody rv d3">My career spans backend systems, Android mobile apps, automation engineering, and Web3 — held together by one belief: technology should remove friction, not create it. Whether architecting a database schema, building an Android app with Firebase, or automating a client's reporting pipeline, I optimise for the same outcome — fewer headaches, faster results.</p>
+      <p class="abody rv d4">Educated across three countries (India, the US, and the UK), working across multiple companies simultaneously, and freelancing for clients ranging from solo founders to established digital agencies. Every project teaches me to move fast without cutting corners.</p>
+      <div class="rv">
+        <div class="elbl">Education</div>
         <div class="erow"><div><div class="eschool">Amity University</div><div class="edeg">Bachelor of Computer Application</div></div><div class="emeta"><div class="eyr">May 2025</div><div>India</div></div></div>
         <div class="erow"><div><div class="eschool">University of Cincinnati</div><div class="edeg">Bachelor of Information Technology</div></div><div class="emeta"><div class="eyr">Dec 2020</div><div>U.S.A</div></div></div>
         <div class="erow"><div><div class="eschool">Leeds Beckett University</div><div class="edeg">International Foundation Studies</div></div><div class="emeta"><div class="eyr">Jul 2018</div><div>England</div></div></div>
@@ -523,24 +513,52 @@
     <div class="rv d2">
       <div class="sklbl">Skills & Technologies</div>
       <div class="skc">
-        <div class="sk"><span>PHP</span></div><div class="sk r"><span>Node.js</span></div><div class="sk"><span>MySQL</span></div><div class="sk"><span>PostgreSQL</span></div><div class="sk r"><span>MongoDB</span></div><div class="sk"><span>JavaScript</span></div><div class="sk"><span>HTML5</span></div><div class="sk"><span>CSS3</span></div><div class="sk r"><span>REST APIs</span></div><div class="sk"><span>Docker</span></div><div class="sk"><span>Git</span></div><div class="sk r"><span>Linux Admin</span></div><div class="sk"><span>JWT Auth</span></div><div class="sk"><span>RBAC</span></div><div class="sk r"><span>Workflow Automation</span></div><div class="sk"><span>MVC Architecture</span></div><div class="sk"><span>Blockchain</span></div><div class="sk r"><span>Smart Contracts</span></div><div class="sk"><span>NFT Dev</span></div><div class="sk"><span>Crypto Payments</span></div><div class="sk r"><span>Server Management</span></div><div class="sk"><span>Solidity</span></div><div class="sk"><span>IPFS</span></div><div class="sk r"><span>Web3</span></div><div class="sk"><span>DeFi</span></div><div class="sk"><span>CI/CD</span></div><div class="sk r"><span>System Integration</span></div><div class="sk"><span>Performance Optimisation</span></div><div class="sk"><span>Technical Documentation</span></div><div class="sk r"><span>API Integration</span></div><div class="sk"><span>Video Editing</span></div><div class="sk"><span>Motion Graphics</span></div><div class="sk r"><span>Photoshop</span></div><div class="sk"><span>Process Optimisation</span></div><div class="sk r"><span>Nginx</span></div><div class="sk"><span>SSL / TLS</span></div><div class="sk"><span>Caching Strategies</span></div><div class="sk r"><span>Load Balancing</span></div><div class="sk"><span>Connection Pooling</span></div><div class="sk r"><span>OWASP Security</span></div><div class="sk"><span>Error Handling & Logging</span></div><div class="sk r"><span>Debugging & RCA</span></div><div class="sk"><span>A/B Testing</span></div><div class="sk r"><span>Payment Gateways</span></div><div class="sk"><span>Responsive Design</span></div><div class="sk"><span>Accessibility (WCAG)</span></div>
+        <div class="sk"><span>PHP</span></div><div class="sk r"><span>Node.js</span></div>
+        <div class="sk"><span>Java</span></div><div class="sk r"><span>Kotlin</span></div>
+        <div class="sk"><span>JavaScript</span></div><div class="sk"><span>jQuery</span></div>
+        <div class="sk r"><span>AJAX</span></div><div class="sk"><span>HTML5</span></div>
+        <div class="sk"><span>CSS3</span></div><div class="sk r"><span>Bootstrap</span></div>
+        <div class="sk"><span>Tailwind CSS</span></div><div class="sk r"><span>Android Studio</span></div>
+        <div class="sk"><span>Material Design</span></div><div class="sk"><span>Gradle</span></div>
+        <div class="sk r"><span>Firebase</span></div><div class="sk"><span>FCM Push Notifs</span></div>
+        <div class="sk r"><span>MySQL</span></div><div class="sk"><span>PostgreSQL</span></div>
+        <div class="sk"><span>MongoDB</span></div><div class="sk r"><span>SQLite</span></div>
+        <div class="sk"><span>SQL Optimisation</span></div><div class="sk r"><span>REST APIs</span></div>
+        <div class="sk"><span>WhatsApp API</span></div><div class="sk r"><span>Payment Gateways</span></div>
+        <div class="sk"><span>JWT Auth</span></div><div class="sk r"><span>RBAC</span></div>
+        <div class="sk"><span>Docker</span></div><div class="sk r"><span>Linux Admin</span></div>
+        <div class="sk"><span>Apache / Nginx</span></div><div class="sk r"><span>CI/CD</span></div>
+        <div class="sk"><span>Git / GitHub / GitLab</span></div><div class="sk r"><span>Workflow Automation</span></div>
+        <div class="sk"><span>CRON Jobs</span></div><div class="sk"><span>SMTP Email</span></div>
+        <div class="sk r"><span>MVC Architecture</span></div><div class="sk"><span>OOP</span></div>
+        <div class="sk r"><span>SDLC</span></div><div class="sk"><span>Agile</span></div>
+        <div class="sk"><span>Blockchain</span></div><div class="sk r"><span>Smart Contracts</span></div>
+        <div class="sk"><span>Solidity</span></div><div class="sk r"><span>NFT Dev</span></div>
+        <div class="sk"><span>IPFS</span></div><div class="sk r"><span>Web3 / DeFi</span></div>
+        <div class="sk"><span>Crypto Payments</span></div><div class="sk r"><span>ERP Dev</span></div>
+        <div class="sk"><span>CRM Dev</span></div><div class="sk r"><span>Admin Panels</span></div>
+        <div class="sk"><span>Hospital Mgmt</span></div><div class="sk r"><span>POS Systems</span></div>
+        <div class="sk"><span>Postman / API Testing</span></div><div class="sk r"><span>OWASP Security</span></div>
+        <div class="sk"><span>SSL / TLS</span></div><div class="sk r"><span>Load Balancing</span></div>
+        <div class="sk"><span>Caching Strategies</span></div><div class="sk r"><span>Performance Optimisation</span></div>
+        <div class="sk"><span>Video Editing</span></div><div class="sk r"><span>Photoshop</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CONTACT ===== -->
+<!-- CONTACT -->
 <section id="contact">
   <div class="cttitle rv"><div class="cts">Let's</div><div class="ctsy">Build</div><div class="cts">Something</div></div>
-  <p class="ctsub rv d1">Open for freelance projects, full-time roles, and conversations about hard technical problems. If it needs building, let's talk.</p>
+  <p class="ctsub rv d1">Open for freelance projects, full-time roles, and conversations about hard technical problems. Web, Android, automation, Web3 — if it needs building, let's talk.</p>
   <div class="email-show rv d2"><span style="color:var(--y)">✉</span><a href="mailto:arjunbhandari.1999@gmail.com">arjunbhandari.1999@gmail.com</a></div>
   <div class="ctact rv d2">
     <div class="ctbw">
-      <a class="ctbtn" href="mailto:arjunbhandari.1999@gmail.com"><span>Send Email</span></a>
-      <div style="font-family:var(--fm);font-size:0.55rem;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase">arjunbhandari.1999@gmail.com</div>
+      <a class="ctbtn" href="mailto:arjunbhandari.1999@gmail.com"><span>✉ Send Email</span></a>
+      <div style="font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;color:var(--muted);text-transform:uppercase">arjunbhandari.1999@gmail.com</div>
     </div>
     <div class="ctbw">
-      <a class="ctbtn rb" href="https://wa.me/919373921916" target="_blank" rel="noopener"><span>WhatsApp</span></a>
+      <a class="ctbtn rb" href="https://wa.me/919373921916" target="_blank" rel="noopener"><span>💬 WhatsApp</span></a>
       <div class="qrbox">
         <svg width="108" height="108" viewBox="0 0 37 37" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
           <rect width="37" height="37" fill="white"/>
@@ -549,34 +567,33 @@
           <rect x="0" y="30" width="7" height="7" fill="black"/><rect x="1" y="31" width="5" height="5" fill="white"/><rect x="2" y="32" width="3" height="3" fill="black"/>
           <rect x="8" y="6" width="1" height="1" fill="black"/><rect x="10" y="6" width="1" height="1" fill="black"/><rect x="12" y="6" width="1" height="1" fill="black"/><rect x="14" y="6" width="1" height="1" fill="black"/><rect x="16" y="6" width="1" height="1" fill="black"/><rect x="18" y="6" width="1" height="1" fill="black"/><rect x="20" y="6" width="1" height="1" fill="black"/><rect x="22" y="6" width="1" height="1" fill="black"/>
           <rect x="6" y="8" width="1" height="1" fill="black"/><rect x="6" y="10" width="1" height="1" fill="black"/><rect x="6" y="12" width="1" height="1" fill="black"/><rect x="6" y="14" width="1" height="1" fill="black"/><rect x="6" y="16" width="1" height="1" fill="black"/><rect x="6" y="18" width="1" height="1" fill="black"/><rect x="6" y="20" width="1" height="1" fill="black"/><rect x="6" y="22" width="1" height="1" fill="black"/>
-          <rect x="8" y="8" width="1" height="1" fill="black"/><rect x="10" y="8" width="1" height="1" fill="black"/><rect x="13" y="8" width="1" height="1" fill="black"/><rect x="15" y="8" width="1" height="1" fill="black"/><rect x="17" y="8" width="1" height="1" fill="black"/><rect x="20" y="8" width="1" height="1" fill="black"/><rect x="22" y="8" width="1" height="1" fill="black"/><rect x="24" y="8" width="1" height="1" fill="black"/><rect x="27" y="8" width="1" height="1" fill="black"/><rect x="29" y="8" width="1" height="1" fill="black"/><rect x="31" y="8" width="1" height="1" fill="black"/><rect x="33" y="8" width="1" height="1" fill="black"/><rect x="36" y="8" width="1" height="1" fill="black"/>
-          <rect x="8" y="9" width="1" height="1" fill="black"/><rect x="11" y="9" width="1" height="1" fill="black"/><rect x="14" y="9" width="1" height="1" fill="black"/><rect x="16" y="9" width="1" height="1" fill="black"/><rect x="18" y="9" width="1" height="1" fill="black"/><rect x="21" y="9" width="1" height="1" fill="black"/><rect x="23" y="9" width="1" height="1" fill="black"/><rect x="26" y="9" width="1" height="1" fill="black"/><rect x="28" y="9" width="1" height="1" fill="black"/><rect x="30" y="9" width="1" height="1" fill="black"/><rect x="32" y="9" width="1" height="1" fill="black"/><rect x="34" y="9" width="1" height="1" fill="black"/>
-          <rect x="9" y="10" width="1" height="1" fill="black"/><rect x="12" y="10" width="1" height="1" fill="black"/><rect x="14" y="10" width="1" height="1" fill="black"/><rect x="17" y="10" width="1" height="1" fill="black"/><rect x="19" y="10" width="1" height="1" fill="black"/><rect x="22" y="10" width="1" height="1" fill="black"/><rect x="24" y="10" width="1" height="1" fill="black"/><rect x="27" y="10" width="1" height="1" fill="black"/><rect x="29" y="10" width="1" height="1" fill="black"/><rect x="31" y="10" width="1" height="1" fill="black"/><rect x="33" y="10" width="1" height="1" fill="black"/><rect x="35" y="10" width="1" height="1" fill="black"/>
-          <rect x="8" y="11" width="1" height="1" fill="black"/><rect x="10" y="11" width="1" height="1" fill="black"/><rect x="13" y="11" width="1" height="1" fill="black"/><rect x="15" y="11" width="1" height="1" fill="black"/><rect x="18" y="11" width="1" height="1" fill="black"/><rect x="20" y="11" width="1" height="1" fill="black"/><rect x="23" y="11" width="1" height="1" fill="black"/><rect x="25" y="11" width="1" height="1" fill="black"/><rect x="28" y="11" width="1" height="1" fill="black"/><rect x="30" y="11" width="1" height="1" fill="black"/><rect x="32" y="11" width="1" height="1" fill="black"/><rect x="36" y="11" width="1" height="1" fill="black"/>
-          <rect x="9" y="12" width="1" height="1" fill="black"/><rect x="11" y="12" width="1" height="1" fill="black"/><rect x="14" y="12" width="1" height="1" fill="black"/><rect x="16" y="12" width="1" height="1" fill="black"/><rect x="19" y="12" width="1" height="1" fill="black"/><rect x="21" y="12" width="1" height="1" fill="black"/><rect x="24" y="12" width="1" height="1" fill="black"/><rect x="26" y="12" width="1" height="1" fill="black"/><rect x="29" y="12" width="1" height="1" fill="black"/><rect x="31" y="12" width="1" height="1" fill="black"/><rect x="33" y="12" width="1" height="1" fill="black"/><rect x="35" y="12" width="1" height="1" fill="black"/>
-          <rect x="8" y="13" width="1" height="1" fill="black"/><rect x="12" y="13" width="1" height="1" fill="black"/><rect x="15" y="13" width="1" height="1" fill="black"/><rect x="17" y="13" width="1" height="1" fill="black"/><rect x="20" y="13" width="1" height="1" fill="black"/><rect x="22" y="13" width="1" height="1" fill="black"/><rect x="25" y="13" width="1" height="1" fill="black"/><rect x="27" y="13" width="1" height="1" fill="black"/><rect x="30" y="13" width="1" height="1" fill="black"/><rect x="32" y="13" width="1" height="1" fill="black"/><rect x="34" y="13" width="1" height="1" fill="black"/>
-          <rect x="9" y="14" width="1" height="1" fill="black"/><rect x="11" y="14" width="1" height="1" fill="black"/><rect x="13" y="14" width="1" height="1" fill="black"/><rect x="16" y="14" width="1" height="1" fill="black"/><rect x="18" y="14" width="1" height="1" fill="black"/><rect x="21" y="14" width="1" height="1" fill="black"/><rect x="23" y="14" width="1" height="1" fill="black"/><rect x="26" y="14" width="1" height="1" fill="black"/><rect x="28" y="14" width="1" height="1" fill="black"/><rect x="31" y="14" width="1" height="1" fill="black"/><rect x="33" y="14" width="1" height="1" fill="black"/><rect x="36" y="14" width="1" height="1" fill="black"/>
-          <rect x="8" y="15" width="1" height="1" fill="black"/><rect x="10" y="15" width="1" height="1" fill="black"/><rect x="14" y="15" width="1" height="1" fill="black"/><rect x="17" y="15" width="1" height="1" fill="black"/><rect x="19" y="15" width="1" height="1" fill="black"/><rect x="22" y="15" width="1" height="1" fill="black"/><rect x="24" y="15" width="1" height="1" fill="black"/><rect x="27" y="15" width="1" height="1" fill="black"/><rect x="29" y="15" width="1" height="1" fill="black"/><rect x="32" y="15" width="1" height="1" fill="black"/><rect x="35" y="15" width="1" height="1" fill="black"/>
-          <rect x="9" y="16" width="1" height="1" fill="black"/><rect x="12" y="16" width="1" height="1" fill="black"/><rect x="15" y="16" width="1" height="1" fill="black"/><rect x="18" y="16" width="1" height="1" fill="black"/><rect x="20" y="16" width="1" height="1" fill="black"/><rect x="23" y="16" width="1" height="1" fill="black"/><rect x="25" y="16" width="1" height="1" fill="black"/><rect x="28" y="16" width="1" height="1" fill="black"/><rect x="30" y="16" width="1" height="1" fill="black"/><rect x="33" y="16" width="1" height="1" fill="black"/><rect x="36" y="16" width="1" height="1" fill="black"/>
-          <rect x="8" y="17" width="1" height="1" fill="black"/><rect x="11" y="17" width="1" height="1" fill="black"/><rect x="13" y="17" width="1" height="1" fill="black"/><rect x="16" y="17" width="1" height="1" fill="black"/><rect x="19" y="17" width="1" height="1" fill="black"/><rect x="21" y="17" width="1" height="1" fill="black"/><rect x="24" y="17" width="1" height="1" fill="black"/><rect x="26" y="17" width="1" height="1" fill="black"/><rect x="29" y="17" width="1" height="1" fill="black"/><rect x="31" y="17" width="1" height="1" fill="black"/><rect x="34" y="17" width="1" height="1" fill="black"/>
-          <rect x="9" y="18" width="1" height="1" fill="black"/><rect x="12" y="18" width="1" height="1" fill="black"/><rect x="14" y="18" width="1" height="1" fill="black"/><rect x="17" y="18" width="1" height="1" fill="black"/><rect x="20" y="18" width="1" height="1" fill="black"/><rect x="22" y="18" width="1" height="1" fill="black"/><rect x="25" y="18" width="1" height="1" fill="black"/><rect x="27" y="18" width="1" height="1" fill="black"/><rect x="30" y="18" width="1" height="1" fill="black"/><rect x="32" y="18" width="1" height="1" fill="black"/><rect x="35" y="18" width="1" height="1" fill="black"/>
-          <rect x="8" y="19" width="1" height="1" fill="black"/><rect x="10" y="19" width="1" height="1" fill="black"/><rect x="13" y="19" width="1" height="1" fill="black"/><rect x="15" y="19" width="1" height="1" fill="black"/><rect x="18" y="19" width="1" height="1" fill="black"/><rect x="21" y="19" width="1" height="1" fill="black"/><rect x="23" y="19" width="1" height="1" fill="black"/><rect x="26" y="19" width="1" height="1" fill="black"/><rect x="28" y="19" width="1" height="1" fill="black"/><rect x="31" y="19" width="1" height="1" fill="black"/><rect x="33" y="19" width="1" height="1" fill="black"/><rect x="36" y="19" width="1" height="1" fill="black"/>
-          <rect x="9" y="20" width="1" height="1" fill="black"/><rect x="11" y="20" width="1" height="1" fill="black"/><rect x="14" y="20" width="1" height="1" fill="black"/><rect x="16" y="20" width="1" height="1" fill="black"/><rect x="19" y="20" width="1" height="1" fill="black"/><rect x="22" y="20" width="1" height="1" fill="black"/><rect x="24" y="20" width="1" height="1" fill="black"/><rect x="27" y="20" width="1" height="1" fill="black"/><rect x="29" y="20" width="1" height="1" fill="black"/><rect x="32" y="20" width="1" height="1" fill="black"/><rect x="34" y="20" width="1" height="1" fill="black"/>
-          <rect x="8" y="21" width="1" height="1" fill="black"/><rect x="12" y="21" width="1" height="1" fill="black"/><rect x="15" y="21" width="1" height="1" fill="black"/><rect x="17" y="21" width="1" height="1" fill="black"/><rect x="20" y="21" width="1" height="1" fill="black"/><rect x="23" y="21" width="1" height="1" fill="black"/><rect x="25" y="21" width="1" height="1" fill="black"/><rect x="28" y="21" width="1" height="1" fill="black"/><rect x="30" y="21" width="1" height="1" fill="black"/><rect x="33" y="21" width="1" height="1" fill="black"/>
-          <rect x="9" y="22" width="1" height="1" fill="black"/><rect x="10" y="22" width="1" height="1" fill="black"/><rect x="13" y="22" width="1" height="1" fill="black"/><rect x="16" y="22" width="1" height="1" fill="black"/><rect x="18" y="22" width="1" height="1" fill="black"/><rect x="21" y="22" width="1" height="1" fill="black"/><rect x="24" y="22" width="1" height="1" fill="black"/><rect x="26" y="22" width="1" height="1" fill="black"/><rect x="29" y="22" width="1" height="1" fill="black"/><rect x="31" y="22" width="1" height="1" fill="black"/><rect x="34" y="22" width="1" height="1" fill="black"/><rect x="36" y="22" width="1" height="1" fill="black"/>
-          <rect x="8" y="23" width="1" height="1" fill="black"/><rect x="11" y="23" width="1" height="1" fill="black"/><rect x="14" y="23" width="1" height="1" fill="black"/><rect x="17" y="23" width="1" height="1" fill="black"/><rect x="19" y="23" width="1" height="1" fill="black"/><rect x="22" y="23" width="1" height="1" fill="black"/><rect x="25" y="23" width="1" height="1" fill="black"/><rect x="27" y="23" width="1" height="1" fill="black"/><rect x="30" y="23" width="1" height="1" fill="black"/><rect x="32" y="23" width="1" height="1" fill="black"/><rect x="35" y="23" width="1" height="1" fill="black"/>
-          <rect x="9" y="24" width="1" height="1" fill="black"/><rect x="12" y="24" width="1" height="1" fill="black"/><rect x="15" y="24" width="1" height="1" fill="black"/><rect x="18" y="24" width="1" height="1" fill="black"/><rect x="20" y="24" width="1" height="1" fill="black"/><rect x="23" y="24" width="1" height="1" fill="black"/><rect x="26" y="24" width="1" height="1" fill="black"/><rect x="28" y="24" width="1" height="1" fill="black"/><rect x="31" y="24" width="1" height="1" fill="black"/><rect x="33" y="24" width="1" height="1" fill="black"/><rect x="36" y="24" width="1" height="1" fill="black"/>
+          <rect x="8" y="8" width="2" height="1" fill="black"/><rect x="12" y="8" width="2" height="1" fill="black"/><rect x="16" y="8" width="2" height="1" fill="black"/><rect x="20" y="8" width="2" height="1" fill="black"/><rect x="24" y="8" width="1" height="1" fill="black"/><rect x="27" y="8" width="2" height="1" fill="black"/><rect x="31" y="8" width="2" height="1" fill="black"/><rect x="35" y="8" width="2" height="1" fill="black"/>
+          <rect x="9" y="9" width="1" height="1" fill="black"/><rect x="13" y="9" width="1" height="1" fill="black"/><rect x="17" y="9" width="1" height="1" fill="black"/><rect x="21" y="9" width="1" height="1" fill="black"/><rect x="25" y="9" width="1" height="1" fill="black"/><rect x="28" y="9" width="1" height="1" fill="black"/><rect x="32" y="9" width="1" height="1" fill="black"/><rect x="36" y="9" width="1" height="1" fill="black"/>
+          <rect x="8" y="10" width="1" height="1" fill="black"/><rect x="11" y="10" width="1" height="1" fill="black"/><rect x="14" y="10" width="1" height="1" fill="black"/><rect x="18" y="10" width="1" height="1" fill="black"/><rect x="22" y="10" width="1" height="1" fill="black"/><rect x="26" y="10" width="1" height="1" fill="black"/><rect x="29" y="10" width="1" height="1" fill="black"/><rect x="33" y="10" width="1" height="1" fill="black"/>
+          <rect x="9" y="11" width="2" height="1" fill="black"/><rect x="13" y="11" width="1" height="1" fill="black"/><rect x="16" y="11" width="2" height="1" fill="black"/><rect x="20" y="11" width="1" height="1" fill="black"/><rect x="23" y="11" width="2" height="1" fill="black"/><rect x="27" y="11" width="1" height="1" fill="black"/><rect x="30" y="11" width="2" height="1" fill="black"/><rect x="34" y="11" width="2" height="1" fill="black"/>
+          <rect x="8" y="12" width="1" height="1" fill="black"/><rect x="12" y="12" width="1" height="1" fill="black"/><rect x="15" y="12" width="1" height="1" fill="black"/><rect x="19" y="12" width="1" height="1" fill="black"/><rect x="22" y="12" width="1" height="1" fill="black"/><rect x="26" y="12" width="1" height="1" fill="black"/><rect x="29" y="12" width="1" height="1" fill="black"/><rect x="33" y="12" width="1" height="1" fill="black"/>
+          <rect x="9" y="13" width="1" height="1" fill="black"/><rect x="13" y="13" width="2" height="1" fill="black"/><rect x="17" y="13" width="1" height="1" fill="black"/><rect x="20" y="13" width="2" height="1" fill="black"/><rect x="24" y="13" width="1" height="1" fill="black"/><rect x="27" y="13" width="2" height="1" fill="black"/><rect x="31" y="13" width="1" height="1" fill="black"/><rect x="35" y="13" width="1" height="1" fill="black"/>
+          <rect x="8" y="14" width="2" height="1" fill="black"/><rect x="12" y="14" width="1" height="1" fill="black"/><rect x="16" y="14" width="1" height="1" fill="black"/><rect x="19" y="14" width="1" height="1" fill="black"/><rect x="23" y="14" width="2" height="1" fill="black"/><rect x="28" y="14" width="1" height="1" fill="black"/><rect x="32" y="14" width="2" height="1" fill="black"/><rect x="36" y="14" width="1" height="1" fill="black"/>
+          <rect x="9" y="15" width="1" height="1" fill="black"/><rect x="14" y="15" width="2" height="1" fill="black"/><rect x="18" y="15" width="1" height="1" fill="black"/><rect x="21" y="15" width="2" height="1" fill="black"/><rect x="25" y="15" width="1" height="1" fill="black"/><rect x="29" y="15" width="2" height="1" fill="black"/><rect x="33" y="15" width="1" height="1" fill="black"/>
+          <rect x="8" y="16" width="1" height="1" fill="black"/><rect x="12" y="16" width="1" height="1" fill="black"/><rect x="15" y="16" width="1" height="1" fill="black"/><rect x="19" y="16" width="2" height="1" fill="black"/><rect x="23" y="16" width="1" height="1" fill="black"/><rect x="26" y="16" width="2" height="1" fill="black"/><rect x="30" y="16" width="1" height="1" fill="black"/><rect x="34" y="16" width="2" height="1" fill="black"/>
+          <rect x="9" y="17" width="2" height="1" fill="black"/><rect x="13" y="17" width="2" height="1" fill="black"/><rect x="17" y="17" width="1" height="1" fill="black"/><rect x="20" y="17" width="1" height="1" fill="black"/><rect x="24" y="17" width="2" height="1" fill="black"/><rect x="28" y="17" width="1" height="1" fill="black"/><rect x="31" y="17" width="2" height="1" fill="black"/><rect x="35" y="17" width="1" height="1" fill="black"/>
+          <rect x="8" y="18" width="1" height="1" fill="black"/><rect x="11" y="18" width="1" height="1" fill="black"/><rect x="14" y="18" width="1" height="1" fill="black"/><rect x="18" y="18" width="2" height="1" fill="black"/><rect x="22" y="18" width="1" height="1" fill="black"/><rect x="25" y="18" width="2" height="1" fill="black"/><rect x="29" y="18" width="1" height="1" fill="black"/><rect x="33" y="18" width="2" height="1" fill="black"/>
+          <rect x="9" y="19" width="1" height="1" fill="black"/><rect x="12" y="19" width="2" height="1" fill="black"/><rect x="16" y="19" width="1" height="1" fill="black"/><rect x="19" y="19" width="1" height="1" fill="black"/><rect x="23" y="19" width="2" height="1" fill="black"/><rect x="27" y="19" width="1" height="1" fill="black"/><rect x="30" y="19" width="2" height="1" fill="black"/><rect x="34" y="19" width="1" height="1" fill="black"/>
+          <rect x="8" y="20" width="2" height="1" fill="black"/><rect x="13" y="20" width="1" height="1" fill="black"/><rect x="16" y="20" width="2" height="1" fill="black"/><rect x="20" y="20" width="1" height="1" fill="black"/><rect x="24" y="20" width="1" height="1" fill="black"/><rect x="28" y="20" width="2" height="1" fill="black"/><rect x="32" y="20" width="1" height="1" fill="black"/><rect x="35" y="20" width="2" height="1" fill="black"/>
           <rect x="28" y="28" width="5" height="5" fill="black"/><rect x="29" y="29" width="3" height="3" fill="white"/><rect x="30" y="30" width="1" height="1" fill="black"/>
-          <rect x="8" y="25" width="1" height="1" fill="black"/><rect x="10" y="25" width="1" height="1" fill="black"/><rect x="13" y="25" width="1" height="1" fill="black"/><rect x="15" y="25" width="1" height="1" fill="black"/><rect x="17" y="25" width="1" height="1" fill="black"/><rect x="20" y="25" width="1" height="1" fill="black"/><rect x="22" y="25" width="1" height="1" fill="black"/><rect x="25" y="25" width="1" height="1" fill="black"/><rect x="27" y="25" width="1" height="1" fill="black"/><rect x="34" y="25" width="1" height="1" fill="black"/><rect x="36" y="25" width="1" height="1" fill="black"/>
-          <rect x="9" y="26" width="1" height="1" fill="black"/><rect x="11" y="26" width="1" height="1" fill="black"/><rect x="14" y="26" width="1" height="1" fill="black"/><rect x="16" y="26" width="1" height="1" fill="black"/><rect x="18" y="26" width="1" height="1" fill="black"/><rect x="21" y="26" width="1" height="1" fill="black"/><rect x="23" y="26" width="1" height="1" fill="black"/><rect x="26" y="26" width="1" height="1" fill="black"/><rect x="33" y="26" width="1" height="1" fill="black"/><rect x="35" y="26" width="1" height="1" fill="black"/>
-          <rect x="8" y="27" width="1" height="1" fill="black"/><rect x="12" y="27" width="1" height="1" fill="black"/><rect x="15" y="27" width="1" height="1" fill="black"/><rect x="17" y="27" width="1" height="1" fill="black"/><rect x="19" y="27" width="1" height="1" fill="black"/><rect x="22" y="27" width="1" height="1" fill="black"/><rect x="24" y="27" width="1" height="1" fill="black"/><rect x="27" y="27" width="1" height="1" fill="black"/><rect x="34" y="27" width="1" height="1" fill="black"/><rect x="36" y="27" width="1" height="1" fill="black"/>
-          <rect x="7" y="30" width="1" height="1" fill="black"/><rect x="9" y="30" width="1" height="1" fill="black"/><rect x="11" y="30" width="1" height="1" fill="black"/><rect x="13" y="30" width="1" height="1" fill="black"/><rect x="15" y="30" width="1" height="1" fill="black"/><rect x="17" y="30" width="1" height="1" fill="black"/><rect x="19" y="30" width="1" height="1" fill="black"/><rect x="21" y="30" width="1" height="1" fill="black"/><rect x="23" y="30" width="1" height="1" fill="black"/><rect x="25" y="30" width="1" height="1" fill="black"/><rect x="33" y="30" width="1" height="1" fill="black"/><rect x="35" y="30" width="1" height="1" fill="black"/>
-          <rect x="7" y="31" width="1" height="1" fill="black"/><rect x="10" y="31" width="1" height="1" fill="black"/><rect x="12" y="31" width="1" height="1" fill="black"/><rect x="14" y="31" width="1" height="1" fill="black"/><rect x="16" y="31" width="1" height="1" fill="black"/><rect x="18" y="31" width="1" height="1" fill="black"/><rect x="20" y="31" width="1" height="1" fill="black"/><rect x="22" y="31" width="1" height="1" fill="black"/><rect x="24" y="31" width="1" height="1" fill="black"/><rect x="26" y="31" width="1" height="1" fill="black"/><rect x="34" y="31" width="1" height="1" fill="black"/><rect x="36" y="31" width="1" height="1" fill="black"/>
-          <rect x="7" y="32" width="1" height="1" fill="black"/><rect x="9" y="32" width="1" height="1" fill="black"/><rect x="11" y="32" width="1" height="1" fill="black"/><rect x="13" y="32" width="1" height="1" fill="black"/><rect x="15" y="32" width="1" height="1" fill="black"/><rect x="17" y="32" width="1" height="1" fill="black"/><rect x="19" y="32" width="1" height="1" fill="black"/><rect x="21" y="32" width="1" height="1" fill="black"/><rect x="23" y="32" width="1" height="1" fill="black"/><rect x="25" y="32" width="1" height="1" fill="black"/><rect x="33" y="32" width="1" height="1" fill="black"/><rect x="35" y="32" width="1" height="1" fill="black"/>
-          <rect x="7" y="33" width="1" height="1" fill="black"/><rect x="10" y="33" width="1" height="1" fill="black"/><rect x="12" y="33" width="1" height="1" fill="black"/><rect x="14" y="33" width="1" height="1" fill="black"/><rect x="16" y="33" width="1" height="1" fill="black"/><rect x="18" y="33" width="1" height="1" fill="black"/><rect x="20" y="33" width="1" height="1" fill="black"/><rect x="22" y="33" width="1" height="1" fill="black"/><rect x="24" y="33" width="1" height="1" fill="black"/><rect x="26" y="33" width="1" height="1" fill="black"/><rect x="34" y="33" width="1" height="1" fill="black"/>
-          <rect x="7" y="34" width="1" height="1" fill="black"/><rect x="9" y="34" width="1" height="1" fill="black"/><rect x="11" y="34" width="1" height="1" fill="black"/><rect x="13" y="34" width="1" height="1" fill="black"/><rect x="15" y="34" width="1" height="1" fill="black"/><rect x="17" y="34" width="1" height="1" fill="black"/><rect x="19" y="34" width="1" height="1" fill="black"/><rect x="21" y="34" width="1" height="1" fill="black"/><rect x="23" y="34" width="1" height="1" fill="black"/><rect x="25" y="34" width="1" height="1" fill="black"/><rect x="33" y="34" width="1" height="1" fill="black"/><rect x="35" y="34" width="1" height="1" fill="black"/>
-          <rect x="7" y="35" width="1" height="1" fill="black"/><rect x="10" y="35" width="1" height="1" fill="black"/><rect x="14" y="35" width="1" height="1" fill="black"/><rect x="17" y="35" width="1" height="1" fill="black"/><rect x="20" y="35" width="1" height="1" fill="black"/><rect x="24" y="35" width="1" height="1" fill="black"/><rect x="27" y="35" width="1" height="1" fill="black"/><rect x="34" y="35" width="1" height="1" fill="black"/><rect x="36" y="35" width="1" height="1" fill="black"/>
-          <rect x="7" y="36" width="1" height="1" fill="black"/><rect x="9" y="36" width="1" height="1" fill="black"/><rect x="11" y="36" width="1" height="1" fill="black"/><rect x="13" y="36" width="1" height="1" fill="black"/><rect x="16" y="36" width="1" height="1" fill="black"/><rect x="18" y="36" width="1" height="1" fill="black"/><rect x="21" y="36" width="1" height="1" fill="black"/><rect x="23" y="36" width="1" height="1" fill="black"/><rect x="25" y="36" width="1" height="1" fill="black"/><rect x="27" y="36" width="1" height="1" fill="black"/><rect x="33" y="36" width="1" height="1" fill="black"/>
+          <rect x="8" y="22" width="7" height="1" fill="black"/><rect x="16" y="22" width="1" height="1" fill="black"/><rect x="18" y="22" width="1" height="1" fill="black"/><rect x="20" y="22" width="1" height="1" fill="black"/><rect x="22" y="22" width="1" height="1" fill="black"/><rect x="24" y="22" width="1" height="1" fill="black"/><rect x="26" y="22" width="1" height="1" fill="black"/><rect x="30" y="22" width="7" height="1" fill="black"/>
+          <rect x="8" y="23" width="1" height="1" fill="black"/><rect x="14" y="23" width="1" height="1" fill="black"/><rect x="17" y="23" width="1" height="1" fill="black"/><rect x="19" y="23" width="2" height="1" fill="black"/><rect x="23" y="23" width="1" height="1" fill="black"/><rect x="25" y="23" width="2" height="1" fill="black"/><rect x="30" y="23" width="1" height="1" fill="black"/><rect x="36" y="23" width="1" height="1" fill="black"/>
+          <rect x="8" y="24" width="1" height="1" fill="black"/><rect x="10" y="24" width="3" height="1" fill="black"/><rect x="14" y="24" width="1" height="1" fill="black"/><rect x="16" y="24" width="1" height="1" fill="black"/><rect x="18" y="24" width="3" height="1" fill="black"/><rect x="22" y="24" width="1" height="1" fill="black"/><rect x="24" y="24" width="1" height="1" fill="black"/><rect x="26" y="24" width="1" height="1" fill="black"/><rect x="30" y="24" width="1" height="1" fill="black"/><rect x="32" y="24" width="3" height="1" fill="black"/><rect x="36" y="24" width="1" height="1" fill="black"/>
+          <rect x="8" y="25" width="1" height="1" fill="black"/><rect x="14" y="25" width="1" height="1" fill="black"/><rect x="17" y="25" width="2" height="1" fill="black"/><rect x="21" y="25" width="1" height="1" fill="black"/><rect x="23" y="25" width="2" height="1" fill="black"/><rect x="27" y="25" width="1" height="1" fill="black"/><rect x="30" y="25" width="1" height="1" fill="black"/><rect x="36" y="25" width="1" height="1" fill="black"/>
+          <rect x="8" y="26" width="1" height="1" fill="black"/><rect x="10" y="26" width="3" height="1" fill="black"/><rect x="14" y="26" width="1" height="1" fill="black"/><rect x="16" y="26" width="1" height="1" fill="black"/><rect x="18" y="26" width="1" height="1" fill="black"/><rect x="20" y="26" width="2" height="1" fill="black"/><rect x="24" y="26" width="1" height="1" fill="black"/><rect x="26" y="26" width="1" height="1" fill="black"/><rect x="30" y="26" width="1" height="1" fill="black"/><rect x="32" y="26" width="1" height="1" fill="black"/><rect x="34" y="26" width="1" height="1" fill="black"/>
+          <rect x="8" y="27" width="1" height="1" fill="black"/><rect x="14" y="27" width="1" height="1" fill="black"/><rect x="17" y="27" width="1" height="1" fill="black"/><rect x="19" y="27" width="2" height="1" fill="black"/><rect x="22" y="27" width="1" height="1" fill="black"/><rect x="25" y="27" width="1" height="1" fill="black"/><rect x="27" y="27" width="1" height="1" fill="black"/><rect x="30" y="27" width="1" height="1" fill="black"/><rect x="33" y="27" width="2" height="1" fill="black"/><rect x="36" y="27" width="1" height="1" fill="black"/>
+          <rect x="7" y="30" width="1" height="7" fill="black"/><rect x="9" y="30" width="1" height="1" fill="black"/><rect x="11" y="30" width="1" height="1" fill="black"/><rect x="13" y="30" width="1" height="1" fill="black"/><rect x="15" y="30" width="1" height="1" fill="black"/><rect x="17" y="30" width="1" height="1" fill="black"/><rect x="19" y="30" width="1" height="1" fill="black"/><rect x="21" y="30" width="1" height="1" fill="black"/><rect x="23" y="30" width="1" height="1" fill="black"/><rect x="25" y="30" width="1" height="1" fill="black"/>
+          <rect x="9" y="31" width="2" height="1" fill="black"/><rect x="13" y="31" width="1" height="1" fill="black"/><rect x="16" y="31" width="2" height="1" fill="black"/><rect x="20" y="31" width="1" height="1" fill="black"/><rect x="22" y="31" width="2" height="1" fill="black"/>
+          <rect x="9" y="32" width="1" height="1" fill="black"/><rect x="12" y="32" width="2" height="1" fill="black"/><rect x="15" y="32" width="1" height="1" fill="black"/><rect x="17" y="32" width="2" height="1" fill="black"/><rect x="21" y="32" width="1" height="1" fill="black"/><rect x="24" y="32" width="1" height="1" fill="black"/>
+          <rect x="9" y="33" width="2" height="1" fill="black"/><rect x="13" y="33" width="2" height="1" fill="black"/><rect x="16" y="33" width="1" height="1" fill="black"/><rect x="19" y="33" width="2" height="1" fill="black"/><rect x="22" y="33" width="1" height="1" fill="black"/><rect x="25" y="33" width="1" height="1" fill="black"/>
+          <rect x="9" y="34" width="1" height="1" fill="black"/><rect x="11" y="34" width="1" height="1" fill="black"/><rect x="14" y="34" width="1" height="1" fill="black"/><rect x="16" y="34" width="2" height="1" fill="black"/><rect x="20" y="34" width="1" height="1" fill="black"/><rect x="23" y="34" width="2" height="1" fill="black"/>
+          <rect x="9" y="35" width="2" height="1" fill="black"/><rect x="13" y="35" width="1" height="1" fill="black"/><rect x="15" y="35" width="2" height="1" fill="black"/><rect x="19" y="35" width="1" height="1" fill="black"/><rect x="22" y="35" width="1" height="1" fill="black"/><rect x="24" y="35" width="2" height="1" fill="black"/>
+          <rect x="9" y="36" width="1" height="1" fill="black"/><rect x="12" y="36" width="1" height="1" fill="black"/><rect x="14" y="36" width="1" height="1" fill="black"/><rect x="16" y="36" width="3" height="1" fill="black"/><rect x="21" y="36" width="1" height="1" fill="black"/><rect x="23" y="36" width="1" height="1" fill="black"/><rect x="25" y="36" width="1" height="1" fill="black"/>
         </svg>
       </div>
       <div class="qrcap">Scan → WhatsApp · +91 93739 21916</div>
@@ -590,330 +607,91 @@
 </section>
 
 <script>
-  (function(){
-    "use strict";
+(function(){
+  // SPLASH
+  var splash=document.getElementById('splash'),pendant=document.getElementById('pendant'),
+      cordFill=document.getElementById('cordFill'),ro=document.getElementById('spRO'),
+      handle=document.getElementById('handle');
+  var dragging=false,startY=0,prog=0,THRESH=0.7;
+  function openSite(){splash.classList.add('hide');document.body.classList.add('unlocked')}
+  function updSplash(p){
+    p=Math.min(1,Math.max(0,p));prog=p;
+    cordFill.style.height=(p*100)+'%';
+    ro.textContent=Math.round(p*100)+'%';
+    if(p>=THRESH)openSite();
+  }
+  function ds(e){if(splash.classList.contains('hide'))return;dragging=true;startY=e.clientY||(e.touches&&e.touches[0]?e.touches[0].clientY:0);pendant.style.cursor='grabbing'}
+  function dm(e){if(!dragging)return;var cy=e.clientY||(e.touches&&e.touches[0]?e.touches[0].clientY:0);var d=(cy-startY);if(d>0)updSplash(d/150)}
+  function de(){if(dragging){dragging=false;pendant.style.cursor='grab';if(prog<THRESH)updSplash(0)}}
+  pendant.addEventListener('mousedown',ds);
+  document.addEventListener('mousemove',dm);
+  document.addEventListener('mouseup',de);
+  pendant.addEventListener('touchstart',function(e){e.preventDefault();var t=e.touches[0];if(t)ds({clientY:t.clientY})},{passive:false});
+  document.addEventListener('touchmove',function(e){var t=e.touches[0];if(t)dm({clientY:t.clientY})},{passive:false});
+  document.addEventListener('touchend',de);
+  document.addEventListener('keydown',function(e){if(e.key==='Enter'&&!splash.classList.contains('hide'))openSite()});
+  handle.addEventListener('click',function(){if(!splash.classList.contains('hide'))openSite()});
 
-    // Wait for DOM to be ready
-    function onReady(fn) {
-      if (document.readyState !== 'loading') {
-        fn();
-      } else {
-        document.addEventListener('DOMContentLoaded', fn);
-      }
-    }
+  // AURA CANVAS
+  var ac=document.getElementById('auraGl');
+  if(ac){var ax=ac.getContext('2d'),ang=0;
+    function ra(){var r=ac.parentElement.getBoundingClientRect();ac.width=r.width||150;ac.height=r.height||150}
+    ra();window.addEventListener('resize',ra);
+    function da(){ax.clearRect(0,0,ac.width,ac.height);var cx=ac.width/2,cy=ac.height/2,rad=Math.min(ac.width,ac.height)*.42;
+      var g=ax.createRadialGradient(cx,cy,0,cx,cy,rad);
+      g.addColorStop(0,'rgba(245,197,24,.15)');g.addColorStop(.5,'rgba(245,197,24,.05)');g.addColorStop(1,'rgba(245,197,24,0)');
+      ax.fillStyle=g;ax.beginPath();ax.arc(cx,cy,rad,0,Math.PI*2);ax.fill();
+      ax.save();ax.translate(cx,cy);ax.rotate(ang);ax.strokeStyle='rgba(245,197,24,.08)';ax.lineWidth=1.2;ax.beginPath();ax.arc(0,0,rad*.7,0,Math.PI*2);ax.stroke();ax.restore();
+      ang+=.008;requestAnimationFrame(da)}
+    da()}
 
-    onReady(function() {
-      
-      // ----- SPLASH: drag pendant -----
-      const splash = document.getElementById('splash');
-      const pendant = document.getElementById('pendant');
-      const cordFill = document.getElementById('cordFill');
-      const readout = document.getElementById('splashReadout');
-      const handle = document.getElementById('handle');
+  // CURSOR
+  var cur=document.getElementById('cur'),cr=document.getElementById('cur-r');
+  var mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+  (function lp(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(lp)})();
+  document.querySelectorAll('a,button,.sk,.fc,.bc,.mc,.pendant,.handle-btn').forEach(function(el){
+    el.addEventListener('mouseenter',function(){document.body.classList.add('hov')});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('hov')});
+  });
 
-      if (splash && pendant && cordFill && readout && handle) {
-        let isDragging = false;
-        let startY = 0;
-        let dragAmount = 0;
-        const threshold = 0.70;
+  // NAV SCROLL
+  var nav=document.getElementById('nav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('sc',window.scrollY>50)},{passive:true});
 
-        function updateSplash(progress) {
-          const p = Math.min(1, Math.max(0, progress));
-          dragAmount = p;
-          cordFill.style.height = (p * 100) + '%';
-          readout.textContent = Math.round(p * 100) + '%';
-          if (p >= threshold) {
-            splash.classList.add('hide');
-            document.body.style.overflow = 'auto';
-          }
-        }
+  // NAV BUTTONS
+  document.querySelectorAll('.nb').forEach(function(b){
+    b.addEventListener('click',function(){var t=document.getElementById(this.dataset.t);if(t)t.scrollIntoView({behavior:'smooth'})});
+  });
 
-        function onDragStart(e) {
-          if (splash.classList.contains('hide')) return;
-          isDragging = true;
-          startY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-          pendant.style.cursor = 'grabbing';
-        }
+  // ACTIVE NAV
+  var nbs=document.querySelectorAll('.nb');
+  var io=new IntersectionObserver(function(ens){ens.forEach(function(e){
+    if(e.isIntersecting){nbs.forEach(function(b){b.classList.remove('act')});var a=document.querySelector('.nb[data-t="'+e.target.id+'"]');if(a)a.classList.add('act')}
+  })},{threshold:.2});
+  ['frontend','backend','android','misc','experience','about','contact'].forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)});
 
-        function onDragMove(e) {
-          if (!isDragging || splash.classList.contains('hide')) return;
-          const currentY = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
-          const delta = (currentY - startY);
-          const progress = Math.min(1, delta / 150);
-          if (progress > 0) updateSplash(progress);
-        }
+  // REVEAL
+  var ro2=new IntersectionObserver(function(ens){ens.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');ro2.unobserve(e.target)}})},{threshold:.08});
+  document.querySelectorAll('.rv').forEach(function(el){ro2.observe(el)});
 
-        function onDragEnd(e) {
-          if (isDragging) {
-            isDragging = false;
-            pendant.style.cursor = 'grab';
-            if (dragAmount >= threshold) {
-              splash.classList.add('hide');
-              document.body.style.overflow = 'auto';
-            } else {
-              updateSplash(0);
-            }
-          }
-        }
+  // EXP ITEMS
+  var eo=new IntersectionObserver(function(ens){ens.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.1});
+  document.querySelectorAll('.ei').forEach(function(el){eo.observe(el)});
 
-        pendant.addEventListener('mousedown', onDragStart);
-        document.addEventListener('mousemove', onDragMove);
-        document.addEventListener('mouseup', onDragEnd);
+  // HERO PARALLAX
+  var hv=document.getElementById('hvid');
+  window.addEventListener('scroll',function(){if(hv)hv.style.transform='translateY('+(window.scrollY*.28)+'px)'},{passive:true});
 
-        pendant.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-          const touch = e.touches[0];
-          if (touch) onDragStart({ clientY: touch.clientY });
-        }, { passive: false });
-        
-        document.addEventListener('touchmove', function(e) {
-          const touch = e.touches[0];
-          if (touch) onDragMove({ clientY: touch.clientY });
-        }, { passive: false });
-        
-        document.addEventListener('touchend', onDragEnd);
-
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Enter' && !splash.classList.contains('hide')) {
-            splash.classList.add('hide');
-            document.body.style.overflow = 'auto';
-          }
-        });
-
-        handle.addEventListener('click', function() {
-          if (!splash.classList.contains('hide')) {
-            splash.classList.add('hide');
-            document.body.style.overflow = 'auto';
-          }
-        });
-      }
-
-      // ----- AURA CANVAS -----
-      const auraCanvas = document.getElementById('auraGl');
-      if (auraCanvas) {
-        const ctx = auraCanvas.getContext('2d');
-        let w, h;
-        function resizeAura() {
-          const rect = auraCanvas.parentElement.getBoundingClientRect();
-          auraCanvas.width = rect.width || 160;
-          auraCanvas.height = rect.height || 160;
-          w = auraCanvas.width; 
-          h = auraCanvas.height;
-        }
-        resizeAura();
-        window.addEventListener('resize', resizeAura);
-        let angle = 0;
-        function drawAura() {
-          if (!ctx) return;
-          ctx.clearRect(0, 0, w, h);
-          const cx = w/2, cy = h/2, rad = Math.min(w,h)*0.42;
-          const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, rad);
-          grad.addColorStop(0, 'rgba(245,197,24,0.15)');
-          grad.addColorStop(0.5, 'rgba(245,197,24,0.05)');
-          grad.addColorStop(1, 'rgba(245,197,24,0)');
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(cx, cy, rad, 0, Math.PI*2);
-          ctx.fill();
-          ctx.save();
-          ctx.translate(cx, cy);
-          ctx.rotate(angle);
-          ctx.strokeStyle = 'rgba(245,197,24,0.08)';
-          ctx.lineWidth = 1.2;
-          ctx.beginPath();
-          ctx.arc(0, 0, rad*0.7, 0, Math.PI*2);
-          ctx.stroke();
-          ctx.restore();
-          angle += 0.008;
-          requestAnimationFrame(drawAura);
-        }
-        drawAura();
-      }
-
-      // ----- CURSOR -----
-      const cur = document.getElementById('cur');
-      const curR = document.getElementById('cur-r');
-      if (cur && curR) {
-        let mx = 0, my = 0, rx = 0, ry = 0;
-        document.addEventListener('mousemove', function(e) {
-          mx = e.clientX; 
-          my = e.clientY;
-          cur.style.left = mx + 'px';
-          cur.style.top = my + 'px';
-        });
-        (function loop() {
-          rx += (mx - rx) * 0.11;
-          ry += (my - ry) * 0.11;
-          curR.style.left = rx + 'px';
-          curR.style.top = ry + 'px';
-          requestAnimationFrame(loop);
-        })();
-      }
-
-      // ----- HOVER EFFECTS -----
-      const interactiveElements = document.querySelectorAll('a, button, .sk, .fc, .bc, .mc, .pendant, .handle');
-      interactiveElements.forEach(function(el) {
-        el.addEventListener('mouseenter', function() {
-          document.body.classList.add('hov');
-        });
-        el.addEventListener('mouseleave', function() {
-          document.body.classList.remove('hov');
-        });
-      });
-
-      // ----- NAV -----
-      const nav = document.getElementById('nav');
-      if (nav) {
-        window.addEventListener('scroll', function() {
-          if (window.scrollY > 50) {
-            nav.classList.add('sc');
-          } else {
-            nav.classList.remove('sc');
-          }
-        }, { passive: true });
-      }
-
-      // ----- NAV BUTTONS -----
-      const navButtons = document.querySelectorAll('.nb');
-      navButtons.forEach(function(b) {
-        b.addEventListener('click', function(e) {
-          e.preventDefault();
-          const targetId = this.getAttribute('data-t');
-          if (targetId) {
-            const target = document.getElementById(targetId);
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        });
-      });
-
-      // ----- ACTIVE NAV INDICATOR -----
-      const nbs = document.querySelectorAll('.nb');
-      const sections = ['frontend','backend','misc','experience','about','contact'];
-      const io = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            nbs.forEach(function(b) {
-              b.classList.remove('act');
-            });
-            const active = document.querySelector('.nb[data-t="' + entry.target.id + '"]');
-            if (active) {
-              active.classList.add('act');
-            }
-          }
-        });
-      }, { threshold: 0.25 });
-      
-      sections.forEach(function(id) {
-        const el = document.getElementById(id);
-        if (el) io.observe(el);
-      });
-
-      // ----- REVEAL ANIMATIONS -----
-      const revealObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('vis');
-            revealObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      
-      document.querySelectorAll('.rv').forEach(function(el) {
-        revealObs.observe(el);
-      });
-
-      // ----- EXPERIENCE REVEAL -----
-      const expObs = new IntersectionObserver(function(entries) {
-        entries.forEach(function(e) {
-          if (e.isIntersecting) {
-            e.target.classList.add('vis');
-          }
-        });
-      }, { threshold: 0.1 });
-      
-      document.querySelectorAll('.ei').forEach(function(el) {
-        expObs.observe(el);
-      });
-
-      // ----- HERO VIDEO PARALLAX -----
-      const hvid = document.getElementById('hvid');
-      if (hvid) {
-        window.addEventListener('scroll', function() {
-          hvid.style.transform = 'translateY(' + (window.scrollY * 0.28) + 'px)';
-        }, { passive: true });
-      }
-
-      // ----- PARTICLES -----
-      const c = document.getElementById('ptc');
-      if (c) {
-        const ctx = c.getContext('2d');
-        let W, H, pts = [];
-        
-        function resizePtc() {
-          W = c.width = window.innerWidth;
-          H = c.height = window.innerHeight;
-          pts = [];
-          for (let i = 0; i < 50; i++) {
-            pts.push({
-              x: Math.random() * W,
-              y: Math.random() * H,
-              vx: (Math.random() - 0.5) * 0.25,
-              vy: (Math.random() - 0.5) * 0.25,
-              r: Math.random() * 1.0 + 0.3
-            });
-          }
-        }
-        
-        resizePtc();
-        window.addEventListener('resize', resizePtc);
-        
-        function drawPtc() {
-          ctx.clearRect(0, 0, W, H);
-          
-          pts.forEach(function(p) {
-            p.x += p.vx; 
-            p.y += p.vy;
-            if (p.x < 0) p.x = W; 
-            if (p.x > W) p.x = 0;
-            if (p.y < 0) p.y = H; 
-            if (p.y > H) p.y = 0;
-            
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(245,197,24,0.5)';
-            ctx.fill();
-          });
-          
-          for (let i = 0; i < pts.length; i++) {
-            for (let j = i + 1; j < pts.length; j++) {
-              const a = pts[i];
-              const b = pts[j];
-              const dx = a.x - b.x;
-              const dy = a.y - b.y;
-              const d = Math.sqrt(dx*dx + dy*dy);
-              
-              if (d < 110) {
-                ctx.beginPath();
-                ctx.moveTo(a.x, a.y);
-                ctx.lineTo(b.x, b.y);
-                ctx.strokeStyle = 'rgba(245,197,24,' + (0.04 * (1 - d/110)) + ')';
-                ctx.lineWidth = 0.5;
-                ctx.stroke();
-              }
-            }
-          }
-          
-          requestAnimationFrame(drawPtc);
-        }
-        
-        drawPtc();
-      }
-
-    });
-
-  })();
+  // PARTICLES
+  var c=document.getElementById('ptc'),ctx=c.getContext('2d'),W,H,pts=[];
+  function rz(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;pts=[];for(var i=0;i<50;i++)pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25,r:Math.random()*1+.3})}
+  rz();window.addEventListener('resize',rz);
+  function dp(){ctx.clearRect(0,0,W,H);pts.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=W;if(p.x>W)p.x=0;if(p.y<0)p.y=H;if(p.y>H)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(245,197,24,.5)';ctx.fill()});
+  for(var i=0;i<pts.length;i++)for(var j=i+1;j<pts.length;j++){var a=pts[i],b=pts[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle='rgba(245,197,24,'+(0.04*(1-d/110))+')';ctx.lineWidth=.5;ctx.stroke()}}
+  requestAnimationFrame(dp)}
+  dp();
+})();
 </script>
 </body>
 </html>
