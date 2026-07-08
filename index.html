@@ -79,7 +79,7 @@ section{ position:relative; }
   font-family:var(--font-mono); font-size:12px; letter-spacing:.24em; text-transform:uppercase;
   color:var(--accent); font-weight:500; display:flex; align-items:center; gap:var(--sp-2);
 }
-.eyebrow::before{ content:''; width:24px; height:1px; background:var(--accent); display:inline-block; }
+
 
 /* Grain + glow */
 .grain{
@@ -163,7 +163,8 @@ section{ position:relative; }
   position:absolute; inset:0; background:rgba(5,5,5,0.6); z-index:1;
 }
 
-.hero-copy{ position:relative; z-index:2; max-width:760px; }
+.hero-copy{ position:relative; z-index:2; max-width:760px; margin-right:auto; text-align:left; }
+.hero-top .container{ margin-left:0; margin-right:auto; }
 .hero-copy .eyebrow{ margin-bottom:var(--sp-4); }
 .hero-title{
   font-family:var(--font-display); font-weight:700; font-size:clamp(38px, 5.4vw, 82px);
@@ -489,42 +490,42 @@ section{ position:relative; }
           <div class="eyebrow">01 / FRONTEND</div>
           <h3 class="cap-title">What Users See</h3>
         </div>
-        <p class="cap-lede">Pixel-perfect, mobile-first interfaces built with semantic HTML5 and modern CSS3. Every breakpoint tested, every interaction considered for cross-browser, accessible delivery.</p>
+        <p class="cap-lede">Pixel perfect, mobile first interfaces built with semantic HTML5 and modern CSS3. Every breakpoint tested, every interaction considered for cross browser, accessible delivery.</p>
       </div>
       <div class="cap-grid">
         <div class="cap-card">
           <span class="cap-num">01</span>
           <h4 class="cap-name">UI / UX Engineering</h4>
           <p class="cap-sub">Responsive Web Interfaces</p>
-          <p class="cap-desc">Pixel-perfect, mobile-first layouts with semantic HTML5 and modern CSS3.</p>
+          <p class="cap-desc">Pixel perfect, mobile first layouts with semantic HTML5 and modern CSS3.</p>
           <div class="cap-tags"><span>HTML5</span><span>CSS3</span><span>Responsive</span></div>
         </div>
         <div class="cap-card">
           <span class="cap-num">02</span>
           <h4 class="cap-name">Interactivity</h4>
           <p class="cap-sub">Dynamic JavaScript &amp; jQuery</p>
-          <p class="cap-desc">AJAX data fetches, animated dashboards, real-time updates, form validation.</p>
+          <p class="cap-desc">AJAX data fetches, animated dashboards, real time updates, form validation.</p>
           <div class="cap-tags"><span>JavaScript</span><span>jQuery</span><span>AJAX</span></div>
         </div>
         <div class="cap-card">
           <span class="cap-num">03</span>
           <h4 class="cap-name">CSS Frameworks</h4>
           <p class="cap-sub">Bootstrap &amp; Tailwind CSS</p>
-          <p class="cap-desc">Rapid UI development at scale, alongside utility-first custom design systems.</p>
+          <p class="cap-desc">Rapid UI development at scale, alongside utility first custom design systems.</p>
           <div class="cap-tags"><span>Bootstrap</span><span>Tailwind</span></div>
         </div>
         <div class="cap-card">
           <span class="cap-num">04</span>
           <h4 class="cap-name">Web Applications</h4>
-          <p class="cap-sub">Full Client-Side Applications</p>
+          <p class="cap-sub">Full Client Side Applications</p>
           <p class="cap-desc">Complete SPAs with routing, state management, and seamless API integration.</p>
           <div class="cap-tags"><span>SPA</span><span>State Mgmt</span></div>
         </div>
         <div class="cap-card">
           <span class="cap-num">05</span>
           <h4 class="cap-name">Performance</h4>
-          <p class="cap-sub">Optimised Fast-Loading UIs</p>
-          <p class="cap-desc">Code-splitting, lazy loading, and CDN delivery for sub-second mobile loads.</p>
+          <p class="cap-sub">Optimised Fast Loading UIs</p>
+          <p class="cap-desc">Code splitting, lazy loading, and CDN delivery for sub-second mobile loads.</p>
           <div class="cap-tags"><span>Lazy Load</span><span>CDN</span></div>
         </div>
         <div class="cap-card">
@@ -544,8 +545,8 @@ section{ position:relative; }
         <div class="cap-card">
           <span class="cap-num">08</span>
           <h4 class="cap-name">Collaboration</h4>
-          <p class="cap-sub">Design-to-Dev Handoff</p>
-          <p class="cap-desc">Pixel-precise implementation of mockups, with tight creative/product feedback loops.</p>
+          <p class="cap-sub">Design to Dev Handoff</p>
+          <p class="cap-desc">Pixel precise implementation of mockups, with tight creative/product feedback loops.</p>
           <div class="cap-tags"><span>Figma</span><span>Handoff</span></div>
         </div>
       </div>
@@ -558,14 +559,14 @@ section{ position:relative; }
           <div class="eyebrow">02 / BACKEND</div>
           <h3 class="cap-title">What Powers It</h3>
         </div>
-        <p class="cap-lede">Robust server-side systems in PHP and Node.js, multi-database architecture, and automation pipelines built to reduce manual effort by 35–40% across real business workflows.</p>
+        <p class="cap-lede">Robust server side systems in PHP and Node.js, multi database architecture, and automation pipelines built to reduce manual effort by 35–40% across real business workflows.</p>
       </div>
       <div class="cap-grid">
         <div class="cap-card">
           <span class="cap-num">01</span>
           <h4 class="cap-name">Server-Side</h4>
           <p class="cap-sub">PHP &amp; Node.js Systems</p>
-          <p class="cap-desc">MVC/OOP architecture and event-driven, high-throughput APIs.</p>
+          <p class="cap-desc">MVC/OOP architecture and event-driven, high throughout APIs.</p>
           <div class="cap-tags"><span>PHP</span><span>Node.js</span><span>MVC</span></div>
         </div>
         <div class="cap-card">
@@ -655,7 +656,7 @@ section{ position:relative; }
           <span class="cap-num">04</span>
           <h4 class="cap-name">Local Storage</h4>
           <p class="cap-sub">SQLite &amp; SharedPreferences</p>
-          <p class="cap-desc">Structured storage and lightweight session data, offline-first.</p>
+          <p class="cap-desc">Structured storage and lightweight session data, offline first.</p>
           <div class="cap-tags"><span>SQLite</span><span>Room</span></div>
         </div>
         <div class="cap-card">
@@ -724,7 +725,7 @@ section{ position:relative; }
           <span class="cap-num">◉</span>
           <h4 class="cap-name">Creative</h4>
           <p class="cap-sub">Video &amp; Image Editing</p>
-          <p class="cap-desc">Post-production video, colour grading, and image retouching.</p>
+          <p class="cap-desc">Post production video, colour grading, and image retouching.</p>
           <div class="cap-tags"><span>Video</span><span>Photoshop</span></div>
         </div>
         <div class="cap-card">
@@ -775,7 +776,7 @@ section{ position:relative; }
         <ul class="tl-list">
           <li>Developed and maintained backend systems and Android applications using modern frameworks, mobile tech, and database systems.</li>
           <li>Built automation solutions reducing repetitive operational tasks by approximately 35% across internal business workflows.</li>
-          <li>Implemented secure authentication, role-based access control, and data validation across web and Android applications.</li>
+          <li>Implemented secure authentication, role based access control, and data validation across web and Android applications.</li>
           <li>Optimised application performance through efficient database queries, code refactoring, and resource utilisation.</li>
         </ul>
         <div class="tl-tags"><span>REST APIs</span><span>Android</span><span>Automation</span><span>RBAC</span></div>
@@ -789,7 +790,7 @@ section{ position:relative; }
         <div class="tl-company">The Control Room</div>
         <div class="tl-location">Mumbai, IN</div>
         <ul class="tl-list">
-          <li>Led automation and development operations across multiple simultaneous digital and web-based projects, covering timelines, deliverables, and technical strategy.</li>
+          <li>Led automation and development operations across multiple simultaneous digital and web based projects, covering timelines, deliverables, and technical strategy.</li>
           <li>Designed automated workflows for content management and client reporting, reducing manual intervention by nearly 40% across all active accounts.</li>
           <li>Implemented Docker containerisation across key projects to standardise dev, testing, and deployment, cutting environment bugs significantly.</li>
         </ul>
@@ -806,7 +807,7 @@ section{ position:relative; }
         <ul class="tl-list">
           <li>Delivered blockchain projects, including crypto payment integrations, wallet functionality, transaction tracking, NFT generation, and DeFi smart contracts.</li>
           <li>Built scalable admin panels, CRM, ERP, inventory management, billing, hospital management, and POS systems from the ground up.</li>
-          <li>Managed Linux servers, Apache/Nginx configuration, DNS, SSL implementation, and production maintenance end-to-end.</li>
+          <li>Managed Linux servers, Apache/Nginx configuration, DNS, SSL implementation, and production maintenance end to end.</li>
         </ul>
         <div class="tl-tags"><span>PHP</span><span>Android</span><span>Web3</span><span>Linux</span></div>
       </div>
@@ -819,8 +820,8 @@ section{ position:relative; }
         <div class="tl-company">Visom 6</div>
         <div class="tl-location">Mumbai, IN</div>
         <ul class="tl-list">
-          <li>Assisted in design, development, and optimisation of client-facing websites across frontend and backend layers on live projects.</li>
-          <li>Contributed to maintenance and troubleshooting of existing web platforms to ensure zero-downtime performance.</li>
+          <li>Assisted in design, development, and optimisation of client facing websites across frontend and backend layers on live projects.</li>
+          <li>Contributed to maintenance and troubleshooting of existing web platforms to ensure zero downtime performance.</li>
         </ul>
         <div class="tl-tags"><span>Frontend</span><span>Backend</span><span>Maintenance</span></div>
       </div>
@@ -858,7 +859,7 @@ section{ position:relative; }
           </div>
           <div class="value-card reveal reveal-3">
             <h4>Fast without corners cut</h4>
-            <p>Speed and rigor aren't a trade-off. They're both the standard.</p>
+            <p>Speed and rigor aren't a trade off. They're both the standard.</p>
           </div>
           <div class="value-card reveal reveal-4">
             <h4>Ready for 2am</h4>
@@ -965,7 +966,7 @@ section{ position:relative; }
       <div>
         <div class="eyebrow reveal">OPEN FOR WORK</div>
         <h2 class="contact-title reveal reveal-1">Let's Build<br/>Something<span class="text-accent">.</span></h2>
-        <p class="contact-sub reveal reveal-2">Open for freelance projects, full-time roles, and conversations about hard technical problems. Web, Android, automation, Web3: if it needs building, let's talk.</p>
+        <p class="contact-sub reveal reveal-2">Open for freelance projects, full time roles, and conversations about hard technical problems. Web, Android, automation, Web3: if it needs building, let's talk.</p>
         <div class="social-row reveal reveal-3">
           <a href="mailto:arjunbhandari.1999@gmail.com" class="social-pill magnetic">✉ Send Email</a>
           <a href="https://wa.me/919373921916" class="social-pill magnetic">💬 WhatsApp</a>
